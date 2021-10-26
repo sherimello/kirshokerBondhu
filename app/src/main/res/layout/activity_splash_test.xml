@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SplashTest">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/logo"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="11dp"
+        android:transitionName="continue"
+        app:cardBackgroundColor="@color/greenishGrey"
+        app:cardCornerRadius="10000dp"
+        app:cardElevation="11dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="23dp"
+            android:src="@drawable/logo"
+            app:tint="@color/white"
+            android:contentDescription="@string/logo" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawablePadding="11dp"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/Continue"
+        android:textSize="21sp"
+        android:translationY="21dp"
+        app:drawableEndCompat="@drawable/arrow2"
+        app:drawableTint="#72012d" />
+
+
+</RelativeLayout>

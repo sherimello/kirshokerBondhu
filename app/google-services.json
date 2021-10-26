@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "879532020359",
+    "firebase_url": "https://kirshokerbondhu-default-rtdb.firebaseio.com",
+    "project_id": "kirshokerbondhu",
+    "storage_bucket": "kirshokerbondhu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879532020359:android:fe1c3c95eeabe873f7de22",
+        "android_client_info": {
+          "package_name": "com.example.kirshokerbondhu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879532020359-lm3bd64k22r37cgjf4m7j0760jrptiou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kirshokerbondhu",
+            "certificate_hash": "ee9573a562979c3d7f29d0fc5a6b564233eb0a5d"
+          }
+        },
+        {
+          "client_id": "879532020359-p2s9p6jqo9r7ik0gdt1ehr5p3g1qp0k6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwRNq-un8RUuoKuBxDgghMUl41avJvCOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879532020359-p2s9p6jqo9r7ik0gdt1ehr5p3g1qp0k6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

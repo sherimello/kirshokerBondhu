@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Krishaker Bondhu</string>
+    <string name="Continue">continue</string>
+    <string name="logo">logo</string>
+    <string name="onboarding_text2">snap and check \nwhat disease your crops are infected with...</string>
+    <string name="crop_disease">crop disease</string>
+    <string name="swipe_right">swipe right</string>
+    <string name="onboarding_text1">get crop recommendation based on your local weather assessment...</string>
+    <string name="swipe">swipe</string>
+    <string name="onboarding_text3">know the right crop to grow for your specific soil type...</string>
+    <string name="onboarding_text4">get total aid in preparing the budget for your next farming session...</string>
+    <string name="krishoker">কৃষকের</string>
+    <string name="bondhu">বন্ধু</string>
+    <string name="sign_in_with_google">sign in with Google</string>
+    <string name="designed_and_developed_by_team_amigo_ltd">designed and developed by team Amigo LTD.</string>
+    <string name="intro_prompt">first ever application dedicated solely to help our beloved farmers, as a token of appreciation from team Amigo...</string>
+</resources>
