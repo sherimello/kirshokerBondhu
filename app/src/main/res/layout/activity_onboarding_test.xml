@@ -26,6 +26,7 @@
         android:fontFamily="@font/bontserrat_bold"
         android:text="@string/Continue"
         android:textSize="13sp"
+        android:backgroundTint="@color/greenishGrey"
         android:onClick="goto_SignIn"
         android:visibility="gone"
         android:textAllCaps="false"

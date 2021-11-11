@@ -1,8 +1,8 @@
 package com.example.kirshokerbondhu.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -39,6 +39,7 @@ public class SignIn extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private String token, default_web_client_ID;
     private FirebaseAuth mAuth;
+    private static String PREF_NAME = "is_data_downloaded";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +143,19 @@ public class SignIn extends AppCompatActivity {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
+                        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+                        if (prefs.contains("status")) {
+                            startActivity(new Intent(getApplicationContext(), DataDownload.class));
+                            finish();
+                            return;
+                        }
+                        int status = prefs.getInt("status", 0);
+                        if (status == 0) {
+                            startActivity(new Intent(getApplicationContext(), DataDownload.class));
+                            finish();
+                            return;
+                        }
+
                         FirebaseUser user = mAuth.getCurrentUser();
 //                            if (Objects.requireNonNull(task.getResult().getAdditionalUserInfo()).isNewUser()) {
 //                                if (user != null) {

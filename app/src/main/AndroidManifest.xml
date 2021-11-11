@@ -10,13 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KirshokerBondhu">
         <activity
+            android:name=".activities.DataDownload"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DevUploadData"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignIn"
             android:exported="false" />
         <activity android:name=".activities.SplashTest" />
-        <activity android:name=".activities.Splash" />
-        <activity android:name=".activities.OnboardingTest" />
         <activity
             android:name=".activities.MainActivity"
+
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activities.OnboardingTest" />
+        <activity
+            android:name=".activities.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
