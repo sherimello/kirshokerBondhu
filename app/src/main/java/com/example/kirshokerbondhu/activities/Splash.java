@@ -56,6 +56,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void onDoubleClick(View v) {
                 sharedPrefs.onboardingPref(getApplicationContext(), 0);
+                sharedPrefs.sharedDataAlreadyDownloadedStatus(getApplicationContext(), 0);
             }
         });
 

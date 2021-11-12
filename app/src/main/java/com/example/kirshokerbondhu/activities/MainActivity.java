@@ -4,9 +4,7 @@ import static android.content.res.Resources.getSystem;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
@@ -25,13 +23,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, bottom_spread_sheet.Data {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
@@ -41,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View swipe_view;
     private TextView text_logout;
     private ConstraintLayout constraint_menu_items, constraint_crop_recommendation;
-    private ArrayList<String> locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        locations = new ArrayList<>();
-        locations = getArrayList("locations");
-//        Toast.makeText(getApplicationContext(), String.valueOf(getArrayList("locations").size()), Toast.LENGTH_SHORT).show();
 
         button_signout = findViewById(R.id.button_signout);
         image_menu = findViewById(R.id.image_menu);
@@ -81,9 +70,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 card_main.animate().rotation(0).translationY(0).translationX(0).scaleX(1).scaleY(1).setDuration(700).setInterpolator(new OvershootInterpolator());
                 constraint_menu_items.animate().translationX(-convertToPx(200)).rotation(19).setDuration(700).setInterpolator(new OvershootInterpolator());
                 constraint_menu_items.setLayerType(View.LAYER_TYPE_NONE, null);
-
-//                    animateMenuItems(0, 0, 1, 10, 0);
-
             }
         });
 
@@ -133,15 +119,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         constraint_menu_items.animate().translationX(0).rotation(0).setDuration(500).setInterpolator(new OvershootInterpolator());
     }
 
-    public ArrayList<String> getArrayList(String key) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Gson gson = new Gson();
-        String json = prefs.getString(key, null);
-        Type type = new TypeToken<ArrayList<String>>() {
-        }.getType();
-        return gson.fromJson(json, type);
-    }
-
     public int convertToPx(int dp) {
         // Get the screen's density scale
         final float scale = getResources().getDisplayMetrics().density;
@@ -149,8 +126,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return (int) (dp * scale + 0.5f);
     }
 
-    @Override
-    public void getArrayList(ArrayList<String> locations) {
-
-    }
 }

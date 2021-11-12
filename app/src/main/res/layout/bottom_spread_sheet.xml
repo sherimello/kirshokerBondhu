@@ -13,6 +13,34 @@
         android:fitsSystemWindows="true"
         android:isScrollContainer="true">
 
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/edit_crop_name"
+            app:layout_constraintStart_toStartOf="@+id/edit_crop_name"
+            app:layout_constraintTop_toBottomOf="@+id/button">
+
+            <RadioButton
+                android:id="@+id/radio_paddy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="11dp"
+                android:fontFamily="@font/bontserrat_bold"
+                android:text="@string/paddy" />
+
+            <RadioButton
+                android:id="@+id/radio_others"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bontserrat_bold"
+                android:text="@string/others" />
+
+        </RadioGroup>
+
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
@@ -33,14 +61,14 @@
             android:id="@+id/text_crop_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="21dp"
             android:fontFamily="@font/bontserrat_bold"
             android:includeFontPadding="false"
             android:text="@string/crop_name"
             android:textColor="@color/greenishGrey"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/edit_crop_name"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <AutoCompleteTextView
             android:id="@+id/edit_crop_name"
@@ -49,11 +77,20 @@
             android:layout_marginTop="5dp"
             android:autofillHints="name"
             android:background="@drawable/stroked_rounded_box"
+            android:completionThreshold="1"
+            android:dropDownAnchor="@id/text_area"
+            android:dropDownHeight="match_parent"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+            android:focusable="true"
             android:fontFamily="@font/bontserrat_bold"
             android:hint="@string/hint_crop_name"
+            android:includeFontPadding="true"
             android:inputType="text"
             android:paddingStart="11dp"
             android:paddingEnd="11dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/greenishGrey"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -78,112 +115,39 @@
             app:layout_constraintStart_toStartOf="@+id/edit_crop_name"
             app:layout_constraintTop_toBottomOf="@+id/edit_crop_name" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_edit_area"
+
+        <AutoCompleteTextView
+            android:id="@+id/edit_area"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="41dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="19dp"
+            android:autofillHints="postalAddress"
+            android:background="@drawable/stroked_rounded_box"
+            android:completionThreshold="1"
+            android:dropDownAnchor="@id/text_area"
+            android:dropDownHeight="match_parent"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+            android:focusable="true"
+            android:fontFamily="@font/bontserrat_bold"
+            android:hint="@string/hint_area"
+            android:includeFontPadding="true"
+            android:inputType="text"
+            android:paddingStart="11dp"
+            android:paddingEnd="11dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="@color/greenishGrey"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/edit_crop_name"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edit_crop_name"
             app:layout_constraintTop_toBottomOf="@+id/text_area"
             app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".65"
-            >
+            app:layout_constraintWidth_percent=".65" />
 
-            <AutoCompleteTextView
-                android:id="@+id/edit_area"
-                android:layout_width="0dp"
-                android:layout_height="41dp"
-                android:autofillHints="postalAddress"
-                android:background="@drawable/stroked_rounded_box"
-                android:completionThreshold="1"
-                android:dropDownAnchor="@id/text_area"
-                android:dropDownHeight="match_parent"
-                android:fillViewport="true"
-                android:fitsSystemWindows="true"
-                android:focusable="true"
-                android:fontFamily="@font/bontserrat_bold"
-                android:hint="@string/hint_area"
-                android:includeFontPadding="true"
-                android:inputType="text"
-                android:paddingStart="11dp"
-                android:paddingEnd="11dp"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:textColor="@color/greenishGrey"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--    <androidx.cardview.widget.CardView-->
-        <!--        android:layout_width="0dp"-->
-        <!--        android:layout_height="39dp"-->
-        <!--        android:visibility="gone"-->
-        <!--        app:cardCornerRadius="100dp"-->
-        <!--        app:cardElevation="7dp"-->
-        <!--        app:layout_constraintBottom_toBottomOf="@+id/edit_area"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintHorizontal_bias=".5"-->
-        <!--        app:layout_constraintStart_toEndOf="@+id/edit_area"-->
-        <!--        app:layout_constraintTop_toTopOf="@+id/edit_area"-->
-        <!--        app:layout_constraintWidth_percent=".4">-->
-
-        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:visibility="visible">-->
-
-        <!--            <ProgressBar-->
-        <!--                android:layout_width="19dp"-->
-        <!--                android:layout_height="19dp"-->
-        <!--                android:layout_marginEnd="5dp"-->
-        <!--                android:indeterminateTint="@color/greenishGrey"-->
-        <!--                app:layout_constraintBottom_toBottomOf="@+id/textView6"-->
-        <!--                app:layout_constraintEnd_toStartOf="@+id/textView6"-->
-        <!--                app:layout_constraintTop_toTopOf="@+id/textView6" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/textView6"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:fontFamily="@font/bontserrat_bold"-->
-        <!--                android:text="@string/loading"-->
-        <!--                android:textColor="@color/black"-->
-        <!--                android:textSize="12sp"-->
-        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                app:layout_constraintStart_toStartOf="parent"-->
-        <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--            <RelativeLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:background="@color/lightGreen">-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_centerInParent="true"-->
-        <!--                    android:drawablePadding="5dp"-->
-        <!--                    android:fontFamily="@font/bontserrat_bold"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="@string/check"-->
-        <!--                    android:textColor="@color/black"-->
-        <!--                    android:textSize="12sp"-->
-        <!--                    app:drawableStartCompat="@drawable/search"-->
-        <!--                    app:drawableTint="@color/black" />-->
-
-        <!--            </RelativeLayout>-->
-
-        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--    </androidx.cardview.widget.CardView>-->
 
         <TextView
             android:id="@+id/textView6"
@@ -191,30 +155,66 @@
             android:layout_height="wrap_content"
             android:layout_margin="17dp"
             android:fontFamily="@font/bontserrat_bold"
-            android:text="sounds great!"
+            android:text="@string/sounds_great"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraint_edit_area" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_area" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
-            android:text="reason:"
+            android:text="@string/reason"
             android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-        <!--        <TextView-->
+        <TextView
+            android:id="@+id/text_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="17dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/greenishGrey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            app:layout_constraintVertical_bias="0" />
+
+
+        <!--        <ScrollView-->
         <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_margin="17dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/textView8">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                >-->
+        <!--                <TextView-->
+        <!--                    android:id="@+id/text_reason"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:fontFamily="@font/montserrat_medium"-->
+        <!--                    android:text="dasdasdasdas"-->
+        <!--                    android:textColor="@color/greenishGrey"-->
+        <!--                    />-->
+
+        <!--            </LinearLayout>-->
+
+        <!--        </ScrollView>-->
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

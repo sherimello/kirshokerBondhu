@@ -32,5 +32,9 @@
     <string name="Dhaka">Dhaka</string>
     <string name="dummy_data_download_dialogue">please don\'t leave the app\ndownloading loaction data...</string>
     <string name="upload">upload</string>
+    <string name="paddy">paddy</string>
+    <string name="others">others</string>
+    <string name="reason">reason:</string>
+    <string name="sounds_great">sounds great!</string>
 
 </resources>
