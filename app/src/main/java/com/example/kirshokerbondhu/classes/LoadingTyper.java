@@ -6,7 +6,7 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 
-public class TypeWriter extends androidx.appcompat.widget.AppCompatTextView {
+public class LoadingTyper extends androidx.appcompat.widget.AppCompatTextView {
 
     private static final String TAG = LoadingTyper.class.getSimpleName();
     private CharSequence mText;
@@ -14,7 +14,7 @@ public class TypeWriter extends androidx.appcompat.widget.AppCompatTextView {
     private long mDelay = 500; // Default 500ms character delay
     Handler animationCompleteCallBack;
 
-    public TypeWriter(Context context) {
+    public LoadingTyper(Context context) {
         super(context);
     }
 
@@ -22,7 +22,7 @@ public class TypeWriter extends androidx.appcompat.widget.AppCompatTextView {
         this.animationCompleteCallBack = animationCompleteCallBack;
     }
 
-    public TypeWriter(Context context, AttributeSet attrs) {
+    public LoadingTyper(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

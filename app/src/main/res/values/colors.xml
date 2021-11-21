@@ -11,4 +11,5 @@
     <color name="greenishGrey">#FF303530</color>
     <color name="lightGreen">#FFCEFACE</color>
     <color name="green">#218A04</color>
+    <color name="red">#ff0000</color>
 </resources>

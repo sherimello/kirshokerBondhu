@@ -36,5 +36,6 @@
     <string name="others">others</string>
     <string name="reason">reason:</string>
     <string name="sounds_great">sounds great!</string>
+    <string name="red">#FF0000</string>
 
 </resources>
