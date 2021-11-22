@@ -1,5 +1,6 @@
 package com.example.kirshokerbondhu.activities;
 
+import android.animation.LayoutTransition;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -26,6 +28,7 @@ public class Splash extends AppCompatActivity {
     private ImageView image_bg;
     private static final String ON_BOARDING_SEEN_STATE = "isOnboardingSeen";
     private SharedPrefs sharedPrefs;
+    private ConstraintLayout constraint_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,9 @@ public class Splash extends AppCompatActivity {
         text_krishoker = findViewById(R.id.text_krishoker);
         text_bondhu = findViewById(R.id.text_bondhu);
         image_bg = findViewById(R.id.image_bg);
+        constraint_main = findViewById(R.id.constraint_main);
 
+        setRootLayoutAnimation();
         sharedPrefs = new SharedPrefs();
 
         Glide.with(this)
@@ -60,6 +65,12 @@ public class Splash extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setRootLayoutAnimation() {
+        LayoutTransition layoutTransition = new LayoutTransition();
+        layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
+        constraint_main.setLayoutTransition(layoutTransition);
     }
 
     private void changeActivity() {
@@ -92,13 +103,14 @@ public class Splash extends AppCompatActivity {
 
     private void animateTexts() {
         new Handler().postDelayed(() -> {
-            text_krishoker.setCharacterDelay(100);
+            text_krishoker.setCharacterDelay(111);
+            text_krishoker.setAnimationCompleteListener(new Handler(msg -> {
+                text_bondhu.setCharacterDelay(111);
+                text_bondhu.animateText(getResources().getString(R.string.bondhu));
+                return false;
+            }));
             text_krishoker.animateText(getResources().getString(R.string.krishoker));
         }, 500);
-        new Handler().postDelayed(() -> {
-            text_bondhu.setCharacterDelay(100);
-            text_bondhu.animateText(getResources().getString(R.string.bondhu));
-        }, getResources().getString(R.string.krishoker).length() * 100L + 500);
 
     }
 }

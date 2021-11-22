@@ -30,7 +30,7 @@ public class TypeWriter extends androidx.appcompat.widget.AppCompatTextView {
     private final Runnable characterAdder = new Runnable() {
         @Override
         public void run() {
-            if (mIndex++ < mText.length())
+            if (mIndex <= mText.length())
                 setText(mText.subSequence(0, mIndex++));
             if (mIndex <= mText.length()) {
                 mHandler.postDelayed(characterAdder, mDelay);

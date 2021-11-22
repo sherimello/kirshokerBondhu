@@ -16,23 +16,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.kirshokerbondhu.R;
 import com.example.kirshokerbondhu.classes.OnSwipeTouchListener;
+import com.example.kirshokerbondhu.classes.TypeWriter;
 import com.example.kirshokerbondhu.classes.bottom_spread_sheet;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private Button button_signout;
-    private ImageView image_menu;
+    private ImageView image_menu, image_dp;
     private CardView card_main, card_crop_recommendation;
     private View swipe_view;
-    private TextView text_logout;
+    private TextView text_logout, text_mail;
+    private TypeWriter text_privacy;
+    private CollapsingToolbarLayout collapsing_toolbar;
     private ConstraintLayout constraint_menu_items, constraint_crop_recommendation;
 
     @Override
@@ -44,12 +51,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button_signout = findViewById(R.id.button_signout);
         image_menu = findViewById(R.id.image_menu);
+        image_dp = findViewById(R.id.image_dp);
         card_main = findViewById(R.id.card_main);
         swipe_view = findViewById(R.id.swipe_view);
         text_logout = findViewById(R.id.text_logout);
+        text_mail = findViewById(R.id.text_mail);
+        text_privacy = findViewById(R.id.text_privacy);
+        collapsing_toolbar = findViewById(R.id.collapsing_toolbar);
         constraint_menu_items = findViewById(R.id.constraint_menu_items);
         constraint_crop_recommendation = findViewById(R.id.constraint_crop_recommendation);
         card_crop_recommendation = findViewById(R.id.card_crop_recommendation);
+
+        setUpHeaderInfo();
 
         button_signout.setOnClickListener(view -> signOut());
         image_menu.setOnClickListener(this);
@@ -73,6 +86,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    private void setUpHeaderInfo() {
+        Glide.with(getApplicationContext())
+                .load(Objects.requireNonNull(mAuth.getCurrentUser()).getPhotoUrl())
+                .centerCrop()
+                .into(image_dp);
+        collapsing_toolbar.setTitle("welcome " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
+        text_mail.setText(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail());
+        text_privacy.setCharacterDelay(21);
+        text_privacy.animateText(getString(R.string.privacy_text));
     }
 
     private void signOut() {

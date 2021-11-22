@@ -196,7 +196,7 @@ public class OnboardingTest extends AppCompatActivity {
                 view.setLayerType(View.LAYER_TYPE_NONE, null);
                 if (view == cardView4) {
 
-                    text_intro_prompt.setCharacterDelay(25);
+                    text_intro_prompt.setCharacterDelay(21);
                     text_intro_prompt.animateText(getString(R.string.intro_prompt));
 
                     new Handler().postDelayed(() -> button_continue.setVisibility(View.VISIBLE), getResources().getString(R.string.intro_prompt).length() * 30L);

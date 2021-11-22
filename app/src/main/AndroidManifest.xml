@@ -13,7 +13,7 @@
             android:name=".activities.DataDownload"
             android:exported="false" />
         <activity
-            android:name=".activities.Splash"
+            android:name=".activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SignIn"
@@ -25,7 +25,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activities.OnboardingTest" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

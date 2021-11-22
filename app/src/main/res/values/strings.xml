@@ -37,5 +37,6 @@
     <string name="reason">reason:</string>
     <string name="sounds_great">sounds great!</string>
     <string name="red">#FF0000</string>
+    <string name="privacy_text">click one of the functions presented below to use it.\n***all your information are encrypted before being stored in our servers.</string>
 
 </resources>

@@ -14,7 +14,7 @@ public class DevUploadData extends AppCompatActivity {
 
     private Button button_upload;
     private int counter = 1, chance_counter = 1;
-    private double[] temps = {15.67, 34.44, 21.00, 35.10, 14.77, 27.1, 30.04}, chances_of_rainfall = {21.3, 36.7, 50.0, 63.2, 90.5, 23.1, 33.95, 50.0, 60.3, 91.0, 10.0, 27.7, 50.0, 57.0, 99.0, 30.0, 40.0, 50.0, 65.0, 65.0, 9.0, 13.0, 39.95, 64.13, 70.0};
+    private double[] temps = {15.67, 34.44, 21.00, 35.10, 14.77, 27.1, 30.04}, chances_of_rainfall = {21.3, 36.7, 35.0, 63.2, 90.5, 23.1, 33.95, 50.0, 60.3, 91.0, 10.0, 27.7, 50.0, 57.0, 99.0, 30.0, 40.0, 50.0, 65.0, 65.0, 9.0, 13.0, 39.95, 64.13, 70.0};
     private String[] list = {"Dhaka",
             "Faridpur",
             "Gazipur",
@@ -90,7 +90,7 @@ public class DevUploadData extends AppCompatActivity {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
         button_upload.setOnClickListener(v -> {
-            uploadMonthlyChancesOfRainfallPerLocation(databaseReference);
+            uploadMonthlyChancesOfFloodPerLocation(databaseReference);
         });
     }
 
@@ -98,6 +98,22 @@ public class DevUploadData extends AppCompatActivity {
         for (String s : list) {
             for (double d2 : chances_of_rainfall) {
                 databaseReference.child("Chances Of Rainfall").child(s)
+                        .child(String.valueOf(chance_counter))
+                        .child(String.valueOf(counter)).setValue(d2);
+                if (counter == 5) {
+                    counter = 1;
+                    chance_counter++;
+                } else
+                    counter++;
+            }
+            counter = 1;
+            chance_counter = 1;
+        }
+    }
+    private void uploadMonthlyChancesOfFloodPerLocation(DatabaseReference databaseReference) {
+        for (String s : list) {
+            for (double d2 : chances_of_rainfall) {
+                databaseReference.child("Chances Of Flood").child(s)
                         .child(String.valueOf(chance_counter))
                         .child(String.valueOf(counter)).setValue(d2);
                 if (counter == 5) {
