@@ -21,16 +21,12 @@ import com.example.kirshokerbondhu.classes.OnSwipeTouchListener;
 import com.example.kirshokerbondhu.classes.TypeWriter;
 
 
-public class OnboardingTest extends AppCompatActivity {
+public class OnboardingTest extends AppCompatActivity implements View.OnClickListener {
 
     private static final String ON_BOARDING_SEEN_STATE = "isOnboardingSeen";
     private CardView cardView, cardView2, cardView3, cardView4;
-    private ImageView screw;
-    private LinearLayout linearLayout1, linearLayout2, linearLayout3, linearLayout4;
-    private View swipe_view1, swipe_view2, swipe_view3, swipe_view4;
     private TypeWriter text_intro_prompt;
     private Button button_continue;
-    private ImageView image_bg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +39,12 @@ public class OnboardingTest extends AppCompatActivity {
         cardView2 = findViewById(R.id.card2);
         cardView3 = findViewById(R.id.card3);
         cardView4 = findViewById(R.id.card4);
-        screw = findViewById(R.id.image_screw);
+        ImageView screw = findViewById(R.id.image_screw);
 
-        linearLayout1 = findViewById(R.id.linear1);
-        linearLayout2 = findViewById(R.id.linear2);
-        linearLayout3 = findViewById(R.id.linear3);
-        linearLayout4 = findViewById(R.id.linear4);
+        LinearLayout linearLayout1 = findViewById(R.id.linear1);
+        LinearLayout linearLayout2 = findViewById(R.id.linear2);
+        LinearLayout linearLayout3 = findViewById(R.id.linear3);
+        LinearLayout linearLayout4 = findViewById(R.id.linear4);
 
         text_intro_prompt = findViewById(R.id.text_intro_prompt);
 
@@ -59,10 +55,10 @@ public class OnboardingTest extends AppCompatActivity {
         View view3 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.onboarding_layout2, linearLayout3);
         View view4 = LayoutInflater.from(getApplicationContext()).inflate(R.layout.onboarding_layout1, linearLayout4);
 
-        swipe_view1 = view.findViewById(R.id.swipe_view);
-        swipe_view2 = view2.findViewById(R.id.swipe_view);
-        swipe_view3 = view3.findViewById(R.id.swipe_view);
-        swipe_view4 = view4.findViewById(R.id.swipe_view);
+        View swipe_view1 = view.findViewById(R.id.swipe_view);
+        View swipe_view2 = view2.findViewById(R.id.swipe_view);
+        View swipe_view3 = view3.findViewById(R.id.swipe_view);
+        View swipe_view4 = view4.findViewById(R.id.swipe_view);
 
         screw.setTranslationX(.05f * getResources().getDisplayMetrics().widthPixels + DpTopx(21));
         screw.setTranslationY(.035f * getResources().getDisplayMetrics().heightPixels + DpTopx(21));
@@ -74,6 +70,8 @@ public class OnboardingTest extends AppCompatActivity {
         cardView3.setPivotY(.035f * getResources().getDisplayMetrics().heightPixels + DpTopx(21));
         cardView4.setPivotX(.05f * getResources().getDisplayMetrics().widthPixels + DpTopx(21));
         cardView4.setPivotY(.035f * getResources().getDisplayMetrics().heightPixels + DpTopx(21));
+
+        button_continue.setOnClickListener(this);
 
         swipe_action(swipe_view1);
         swipe_action(swipe_view2);
@@ -216,11 +214,18 @@ public class OnboardingTest extends AppCompatActivity {
         });
     }
 
-    public void goto_SignIn(View view) {
+    public void goto_SignIn() {
         SharedPreferences.Editor editor = getSharedPreferences(ON_BOARDING_SEEN_STATE, MODE_PRIVATE).edit();
         editor.putInt("status", 1);
         editor.apply();
         startActivity(new Intent(getApplicationContext(), SignIn.class));
         finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == button_continue) {
+            goto_SignIn();
+        }
     }
 }

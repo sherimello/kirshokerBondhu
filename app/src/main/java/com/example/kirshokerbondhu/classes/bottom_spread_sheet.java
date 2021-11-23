@@ -10,13 +10,16 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.kirshokerbondhu.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -41,15 +44,28 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
     private SharedPrefs sharedPrefs;
     private ConstraintLayout constraint_container;
     private Button button_check;
-    private String Rain = "";
+    private String Rain = "", tag = "";
     private int counter = 0;
+    private final static String CROP_SUGGESTION = "crop recommendation", BUDGET_FORMATION = "budget formation";
     private double obtained_local_temp = 0.0, obtained_chances_of_rain = 0.0, obtained_chances_of_flood = 0.0, L_Temp = 0.0, U_Temp = 0.0;
+
+    @Override
+    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
+        super.show(manager, tag);
+        this.tag = tag;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.bottom_spread_sheet, container, false);
+//        if (tag.equals(CROP_SUGGESTION))
+            return assignUI(inflater, container);
+//        return null;
+    }
+
+    private View assignUI(LayoutInflater inflater, ViewGroup container) {
+        View v = inflater.inflate(R.layout.bottom_spread_sheet_for_crop_suggestion_and_budget, container, false);
         requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED);
         edit_area = v.findViewById(R.id.edit_area);
         edit_crop_name = v.findViewById(R.id.edit_crop_name);
@@ -61,6 +77,11 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         constraint_container = v.findViewById(R.id.constraint_container);
         button_check = v.findViewById(R.id.button_check);
 
+        if (tag.equals(BUDGET_FORMATION)) {
+            button_check.setText(R.string.get_budget);
+        }
+
+        Toast.makeText(requireContext(), tag, Toast.LENGTH_SHORT).show();
 
         setRootLayoutAnimation();
 
@@ -73,8 +94,6 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         addAdapterToCropNameACTV("rice");
         setListenersToRadioButtons(radio_paddy);
         setListenersToRadioButtons(radio_others);
-
-
         return v;
     }
 
@@ -90,8 +109,10 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                 edit_crop_name.setText("");
                 if (radioButton == radio_paddy) {
                     addAdapterToCropNameACTV("rice");
+                    edit_crop_name.setHint(getString(R.string.hint_crop_name_aus));
                     return;
                 }
+                edit_crop_name.setHint(getString(R.string.hint_crop_name_strawberry));
                 addAdapterToCropNameACTV("other products");
             }
 
@@ -124,7 +145,6 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
     @Override
     public void onClick(View v) {
         if (v == button_check) {
-
             checkIfInputsAreOK();
         }
     }
@@ -155,6 +175,10 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         }
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         getLocationTemperature(databaseReference);
+    }
+
+    private void changeEditTextHint(EditText editText, String hint) {
+        editText.setHint(hint);
     }
 
     private void checkIfInputsAreOK() {
@@ -266,7 +290,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                             s = MessageFormat.format("{0}{1}", s, Objects.requireNonNull(dataSnapshot.getValue()).toString());
                             obtained_chances_of_flood += Double.parseDouble(Objects.requireNonNull(dataSnapshot.getValue()).toString());
                         }
-                        button_check.setText(s);
+//                        button_check.setText(s);
                         obtained_chances_of_flood /= 5;
                         getCropDetails(databaseReference);
                     }

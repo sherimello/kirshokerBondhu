@@ -27,7 +27,6 @@
         android:text="@string/Continue"
         android:textSize="13sp"
         android:backgroundTint="@color/greenishGrey"
-        android:onClick="goto_SignIn"
         android:visibility="gone"
         android:textAllCaps="false"
         android:textColor="@color/white" />
@@ -104,7 +103,8 @@
         android:layout_height="27dp"
         android:elevation="21dp"
         android:src="@drawable/simple_circle"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/white"
+        android:contentDescription="@string/punch_hole_image" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_temp"

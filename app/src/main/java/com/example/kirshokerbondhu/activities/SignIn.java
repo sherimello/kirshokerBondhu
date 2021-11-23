@@ -138,14 +138,14 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
-        Toast.makeText(getApplicationContext(), idToken, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), idToken, Toast.LENGTH_SHORT).show();
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-                        if (prefs.contains("status")) {
-                            startActivity(new Intent(getApplicationContext(), DataDownload.class));
+                        if (prefs.contains("status") && prefs.getInt("status", 0) == 1) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                             return;
                         }

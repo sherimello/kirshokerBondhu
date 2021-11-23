@@ -103,14 +103,23 @@ public class Splash extends AppCompatActivity {
 
     private void animateTexts() {
         new Handler().postDelayed(() -> {
-            text_krishoker.setCharacterDelay(111);
-            text_krishoker.setAnimationCompleteListener(new Handler(msg -> {
-                text_bondhu.setCharacterDelay(111);
-                text_bondhu.animateText(getResources().getString(R.string.bondhu));
-                return false;
-            }));
-            text_krishoker.animateText(getResources().getString(R.string.krishoker));
+
+            text_krishoker.setText(getString(R.string.krishoker));
+            text_krishoker.setVisibility(View.VISIBLE);
+
+
+//            text_krishoker.setCharacterDelay(111);
+//            text_krishoker.setAnimationCompleteListener(new Handler(msg -> {
+//                text_bondhu.setCharacterDelay(111);
+//                text_bondhu.animateText(getResources().getString(R.string.bondhu));
+//                return false;
+//            }));
+//            text_krishoker.animateText(getResources().getString(R.string.krishoker));
         }, 500);
+        new Handler().postDelayed(() -> {
+            text_bondhu.setText(getString(R.string.bondhu));
+            text_krishoker.setVisibility(View.VISIBLE);
+        }, 1000);
 
     }
 }
