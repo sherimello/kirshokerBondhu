@@ -7,6 +7,7 @@
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable-v24/ring.xml" value="0.23544303797468355" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/bottom_left_curve.xml" value="0.23544303797468355" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.23544303797468355" />
+        <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/person2.xml" value="0.18355263157894736" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/search.xml" value="0.23544303797468355" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/simple_circle.xml" value="0.23544303797468355" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/stroked_rounded_box.xml" value="0.23544303797468355" />
@@ -15,8 +16,9 @@
         <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_dev_upload_data.xml" value="0.16944444444444445" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_main.xml" value="0.16944444444444445" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_onboarding_test.xml" value="0.16944444444444445" />
-        <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_sign_in.xml" value="0.20512820512820512" />
-        <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_splash.xml" value="0.22236286919831225" />
+        <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_profile.xml" value="0.17335526315789473" />
+        <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_sign_in.xml" value="0.1716612377850163" />
+        <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_splash.xml" value="0.1716612377850163" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/activity_splash_test.xml" value="0.20512820512820512" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/bottom_spread_sheet.xml" value="0.22236286919831225" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/layout/bottom_spread_sheet_for_crop_suggestion_and_budget.xml" value="0.16944444444444445" />

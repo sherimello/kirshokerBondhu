@@ -54,5 +54,11 @@
     <string name="log_out">log out</string>
     <string name="punch_hole_image">punch hole image</string>
     <string name="background_image">background image</string>
+    <string name="username">username</string>
+    <string name="email_here">email here</string>
+    <string name="phone_number_here">phone number here</string>
+    <string name="send_a_suggestion">send a suggestion</string>
+    <string name="delete_account">delete account</string>
+    <string name="card">card</string>
 
 </resources>

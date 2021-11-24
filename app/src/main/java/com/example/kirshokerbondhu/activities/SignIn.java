@@ -53,6 +53,7 @@ public class SignIn extends AppCompatActivity {
 
         Glide.with(this)
                 .load(ResourcesCompat.getDrawable(getResources(), R.drawable.splashbg, null))
+                .disallowHardwareConfig()
                 .into(image_bg);
 
         button_signin.setOnClickListener(view -> getToken());

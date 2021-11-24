@@ -3,10 +3,13 @@ package com.example.kirshokerbondhu.activities;
 import static android.content.res.Resources.getSystem;
 
 import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Pair;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public ImageView image_menu, image_dp;
     private CardView card_main, card_crop_recommendation, card_budget_formulation;
     private View swipe_view;
-    private TextView text_logout, text_mail;
+    private TextView text_logout, text_mail, text_profile;
     private TypeWriter text_privacy;
     private CollapsingToolbarLayout collapsing_toolbar;
     private ConstraintLayout constraint_menu_items, constraint_crop_recommendation, constraint_budget_formulation;
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         text_logout = findViewById(R.id.text_logout);
         text_mail = findViewById(R.id.text_mail);
         text_privacy = findViewById(R.id.text_privacy);
+        text_profile = findViewById(R.id.text_profile);
         collapsing_toolbar = findViewById(R.id.collapsing_toolbar);
         constraint_menu_items = findViewById(R.id.constraint_menu_items);
         constraint_crop_recommendation = findViewById(R.id.constraint_crop_recommendation);
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        constraint_budget_formulation.setOnClickListener(this);
         card_budget_formulation.setOnClickListener(this);
         text_logout.setOnClickListener(this);
+        text_profile.setOnClickListener(this);
 
         swipe_view.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
             @Override
@@ -96,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animator.start();
         swipe_view.setVisibility(View.GONE);
         card_main.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        card_main.animate().rotation(0).translationY(0).translationX(0).scaleX(1).scaleY(1).setDuration(700).setInterpolator(new OvershootInterpolator());
-        constraint_menu_items.animate().translationX(-convertToPx(200)).rotation(19).setDuration(700).setInterpolator(new OvershootInterpolator());
+        card_main.animate().rotation(0).translationY(0).translationX(0).scaleX(1).scaleY(1).setDuration(500).setInterpolator(new OvershootInterpolator());
+        constraint_menu_items.animate().translationX(-convertToPx(200)).rotation(19).setDuration(500).setInterpolator(new OvershootInterpolator());
         constraint_menu_items.setLayerType(View.LAYER_TYPE_NONE, null);
 
     }
@@ -149,6 +154,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if (v == text_profile) {
+            final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                    this,
+                    Pair.create(card_main, getResources().getString(R.string.card)));
+
+            startActivity(new Intent(getApplicationContext(), Profile.class), options.toBundle());
+            new Handler().postDelayed(this::finish, 1000);
+        }
         if (v == text_logout) {
             signOut();
         }
