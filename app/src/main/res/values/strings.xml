@@ -60,5 +60,9 @@
     <string name="send_a_suggestion">send a suggestion</string>
     <string name="delete_account">delete account</string>
     <string name="card">card</string>
+    <string name="phone_dummy">eg. 01xxxxxxxxx</string>
+    <string name="add_phone">add your phone number</string>
+    <string name="add_address">add your district</string>
+    <string name="save_changes">save changes!</string>
 
 </resources>

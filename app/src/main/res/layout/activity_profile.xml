@@ -32,6 +32,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
@@ -57,32 +58,82 @@
                     app:title="">
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_collapseMode="parallax"
-                        android:orientation="vertical">
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        app:layout_collapseMode="parallax">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_save"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="17dp"
+                                android:animateLayoutChanges="true"
+                                android:visibility="gone"
+                                app:cardCornerRadius="100dp"
+                                app:cardElevation="7dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/button_logout"
+                                app:layout_constraintHorizontal_bias="0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:animateLayoutChanges="true">
+
+                                    <ImageView
+                                        android:id="@+id/imageView"
+                                        android:layout_width="37dp"
+                                        android:layout_height="37dp"
+                                        android:contentDescription="@string/save_changes"
+                                        android:src="@drawable/save"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/text_save"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="5dp"
+                                        android:fontFamily="@font/bontserrat_bold"
+                                        android:text="@string/save_changes"
+                                        android:textColor="@color/black"
+                                        android:textSize="13sp"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
 
                             <ImageView
-                                android:id="@+id/image_menu"
+                                android:id="@+id/image_back"
                                 android:layout_width="27dp"
                                 android:layout_height="27dp"
                                 android:layout_centerVertical="true"
                                 android:layout_margin="17dp"
                                 android:contentDescription="@string/menu"
                                 android:src="@drawable/arrow1"
-                                app:layout_constraintBottom_toBottomOf="@+id/button2"
+                                app:layout_constraintBottom_toBottomOf="@+id/button_logout"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/button2"
+                                app:layout_constraintTop_toTopOf="@+id/button_logout"
                                 app:tint="@color/greenishGrey" />
 
                             <Button
-                                android:id="@+id/button2"
+                                android:id="@+id/button_logout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -109,9 +160,9 @@
                                 android:layout_width="151dp"
                                 android:layout_height="151dp"
                                 android:layout_margin="31dp"
+                                android:transitionName="@string/card"
                                 app:cardCornerRadius="1000dp"
                                 app:cardElevation="11dp"
-                                android:transitionName="@string/card"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.5"
@@ -129,14 +180,12 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
-<!--                    <androidx.appcompat.widget.Toolbar-->
-<!--                        android:id="@+id/toolbar"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@color/white"-->
-<!--                        app:layout_collapseMode="parallax" />-->
-
-
+                    <!--                    <androidx.appcompat.widget.Toolbar-->
+                    <!--                        android:id="@+id/toolbar"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:background="@color/white"-->
+                    <!--                        app:layout_collapseMode="parallax" />-->
 
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -156,7 +205,7 @@
                     android:animateLayoutChanges="true">
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/text_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="11dp"
@@ -169,7 +218,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/text_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="11dp"
@@ -179,20 +228,115 @@
                         android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                        app:layout_constraintTop_toBottomOf="@+id/text_username" />
 
-                    <TextView
-                        android:id="@+id/textView7"
+                    <RelativeLayout
+                        android:id="@+id/relative_add_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="11dp"
-                        android:fontFamily="@font/bontserrat_bold"
-                        android:text="@string/phone_number_here"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
+                        android:animateLayoutChanges="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                        app:layout_constraintTop_toBottomOf="@+id/text_email">
+
+                        <EditText
+                            android:id="@+id/edit_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="11dp"
+                            android:autofillHints="null"
+                            android:background="@drawable/stroked_rounded_box"
+                            android:drawableStart="@drawable/phone"
+                            android:drawablePadding="7dp"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:hint="@string/phone_dummy"
+                            android:includeFontPadding="true"
+                            android:inputType="phone"
+                            android:paddingStart="11dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="11dp"
+                            android:paddingBottom="7dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:visibility="gone"
+                            app:drawableTint="@color/black" />
+
+                        <Button
+                            android:id="@+id/button_add_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginTop="11dp"
+                            android:layout_marginEnd="11dp"
+                            android:layout_marginBottom="11dp"
+                            android:backgroundTint="@color/lightGreen"
+                            android:drawablePadding="9dp"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:gravity="center"
+                            android:paddingStart="11dp"
+                            android:paddingEnd="11dp"
+                            android:text="@string/add_phone"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:icon="@drawable/add_phone"
+                            app:iconTint="@color/black" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/relative_add_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/relative_add_phone">
+
+                        <Button
+                            android:id="@+id/button_add_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightGreen"
+                            android:drawablePadding="9dp"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:gravity="center"
+                            android:paddingStart="11dp"
+                            android:paddingEnd="11dp"
+                            android:text="@string/add_address"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:icon="@drawable/add_location"
+                            app:iconTint="@color/black" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/text_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="11dp"
+                            android:autofillHints="null"
+                            android:background="@drawable/stroked_rounded_box"
+                            android:completionThreshold="1"
+                            android:drawableStart="@drawable/location"
+                            android:drawablePadding="7dp"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:hint="@string/hint_area"
+                            android:includeFontPadding="true"
+                            android:inputType="phone"
+                            android:paddingStart="11dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="11dp"
+                            android:paddingBottom="7dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:visibility="gone"
+                            app:drawableTint="@color/black" />
+                    </RelativeLayout>
+
 
                     <Button
                         android:id="@+id/button3"
@@ -211,20 +355,22 @@
                         app:iconTint="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                        app:layout_constraintTop_toBottomOf="@+id/relative_add_address" />
+
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="11dp"
-                        android:layout_marginRight="11dp"
                         android:layout_marginTop="7dp"
+                        android:layout_marginRight="11dp"
+                        android:backgroundTint="@color/red"
                         android:fontFamily="@font/bontserrat_bold"
                         android:text="@string/delete_account"
                         android:textAllCaps="false"
-                        android:backgroundTint="@color/red"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/white"
+                        android:visibility="gone"
                         app:icon="@drawable/delete"
                         app:iconPadding="9dp"
                         app:iconTint="@color/white"

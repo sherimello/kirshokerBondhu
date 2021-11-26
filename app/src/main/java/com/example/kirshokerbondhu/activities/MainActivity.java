@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TypeWriter text_privacy;
     private CollapsingToolbarLayout collapsing_toolbar;
     private ConstraintLayout constraint_menu_items, constraint_crop_recommendation, constraint_budget_formulation;
+    private Bitmap mIcon_val;
+    private URL newurl = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,10 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         constraint_menu_items.setLayerType(View.LAYER_TYPE_NONE, null);
 
     }
-
-    Bitmap mIcon_val;
-    URL newurl = null;
-
     private void setUpHeaderInfo() {
         setUserPicture();
         collapsing_toolbar.setTitle("welcome " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
@@ -203,6 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (swipe_view.getVisibility() == View.VISIBLE) {
             resetMainCardFromMenuExpansionAnimation();
         } else
-            super.onBackPressed();
+            finishAffinity();
     }
 }
