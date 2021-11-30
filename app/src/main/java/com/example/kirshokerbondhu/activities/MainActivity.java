@@ -46,9 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView text_logout, text_mail, text_profile;
     private TypeWriter text_privacy;
     private CollapsingToolbarLayout collapsing_toolbar;
-    private ConstraintLayout constraint_menu_items, constraint_crop_recommendation, constraint_budget_formulation;
+    private ConstraintLayout constraint_soil_detection, constraint_budget_formulation, constraint_disease_detection, constraint_menu_items, constraint_crop_recommendation;
     private Bitmap mIcon_val;
     private URL newurl = null;
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         text_profile = findViewById(R.id.text_profile);
         collapsing_toolbar = findViewById(R.id.collapsing_toolbar);
         constraint_menu_items = findViewById(R.id.constraint_menu_items);
+        constraint_disease_detection = findViewById(R.id.constraint_disease_detection);
         constraint_crop_recommendation = findViewById(R.id.constraint_crop_recommendation);
         constraint_budget_formulation = findViewById(R.id.constraint_budget_formulation);
+        constraint_soil_detection = findViewById(R.id.constraint_soil_detection);
         card_crop_recommendation = findViewById(R.id.card_crop_recommendation);
         card_budget_formulation = findViewById(R.id.card_budget_formulation);
 
@@ -79,7 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image_menu.setOnClickListener(this);
         card_crop_recommendation.setOnClickListener(this);
         constraint_crop_recommendation.setOnClickListener(this);
-//        constraint_budget_formulation.setOnClickListener(this);
+        constraint_disease_detection.setOnClickListener(this);
+        constraint_budget_formulation.setOnClickListener(this);
+        constraint_soil_detection.setOnClickListener(this);
         card_budget_formulation.setOnClickListener(this);
         text_logout.setOnClickListener(this);
         text_profile.setOnClickListener(this);
@@ -108,9 +113,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         constraint_menu_items.setLayerType(View.LAYER_TYPE_NONE, null);
 
     }
+
     private void setUpHeaderInfo() {
         setUserPicture();
-        collapsing_toolbar.setTitle("welcome " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
+        collapsing_toolbar.setTitle("স্বাগত " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
         text_mail.setText(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail());
         text_privacy.setCharacterDelay(21);
         text_privacy.animateText(getString(R.string.privacy_text));
@@ -167,11 +173,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             animate_main_card();
         }
         if (v == constraint_crop_recommendation) {
-            Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
+            
             new bottom_spread_sheet().show(getSupportFragmentManager(), "crop recommendation");
         }
+        if (v == constraint_disease_detection) {
+            counter++;
+            
+            new bottom_spread_sheet().show(getSupportFragmentManager(), "disease detection" + counter);
+            if (counter == 2) {
+                counter = 0;
+            }
+        }
+        if (v == constraint_soil_detection) {
+            counter++;
+            
+            new bottom_spread_sheet().show(getSupportFragmentManager(), "soil detection" + counter);
+            if (counter == 2) {
+                counter = 0;
+            }
+        }
         if (v == constraint_budget_formulation) {
-            Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
+            
             new bottom_spread_sheet().show(getSupportFragmentManager(), "budget formation");
         }
     }

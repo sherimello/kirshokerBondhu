@@ -269,6 +269,7 @@
                             tools:targetApi="p">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_disease_detection"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="0dp"
@@ -342,6 +343,7 @@
                             tools:targetApi="p">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_soil_detection"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="0dp"

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:padding="11dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_selected_picture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:cardCornerRadius="19dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:animateLayoutChanges="true"
+            >
+            <RelativeLayout
+                android:id="@+id/relative_selected_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@color/black">
+
+                <ImageView
+                    android:id="@+id/image_selected_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha=".51"
+                    android:contentDescription="@string/selected_image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/splashbg"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="101dp"
+                            android:layout_height="101dp"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="11dp"
+                            android:outlineAmbientShadowColor="@color/white"
+                            android:outlineSpotShadowColor="@color/white"
+                            android:layout_gravity="center"
+                            android:layout_margin="19dp"
+                            app:cardBackgroundColor="@color/lightGreen"
+                            >
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="3dp"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                >
+                                <ImageView
+                                    android:id="@+id/image_selected_picture_round"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/selected_image"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/splashbg" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <com.example.kirshokerbondhu.classes.TypeWriter
+                            android:id="@+id/text_disease_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="11dp"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:gravity="center"
+                            android:text=""
+                            android:visibility="gone"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/white" />
+
+                        <com.example.kirshokerbondhu.classes.TypeWriter
+                            android:id="@+id/text_suggestions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="11dp"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:gravity="center"
+                            android:text=""
+                            android:visibility="gone"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:fontFamily="@font/bontserrat_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="―"
+            android:textSize="31sp"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_open_camera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="11dp"
+            app:cardBackgroundColor="@color/lightGreen"
+            app:cardCornerRadius="7dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:drawablePadding="7dp"
+                android:fontFamily="@font/bontserrat_bold"
+                android:gravity="center"
+                android:text="@string/take_a_picture"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:drawableStartCompat="@drawable/camera"
+                app:drawableTint="@color/black" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_open_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="11dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_open_camera">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:drawablePadding="7dp"
+                android:fontFamily="@font/bontserrat_bold"
+                android:gravity="center"
+                android:text="@string/pick_from_gallery"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:drawableStartCompat="@drawable/gallery"
+                app:drawableTint="@color/black" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

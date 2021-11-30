@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Splash extends AppCompatActivity {
 
     private TypeWriter text_krishoker, text_bondhu;
-    private ImageView image_bg;
+    private ImageView image_bg, image_bangabandhu_bg;
     private static final String ON_BOARDING_SEEN_STATE = "isOnboardingSeen";
     private SharedPrefs sharedPrefs;
     private ConstraintLayout constraint_main;
@@ -38,6 +38,7 @@ public class Splash extends AppCompatActivity {
         text_krishoker = findViewById(R.id.text_krishoker);
         text_bondhu = findViewById(R.id.text_bondhu);
         image_bg = findViewById(R.id.image_bg);
+        image_bangabandhu_bg = findViewById(R.id.image_bangabandhu_bg);
         constraint_main = findViewById(R.id.constraint_main);
 
         setRootLayoutAnimation();
@@ -51,7 +52,7 @@ public class Splash extends AppCompatActivity {
         animateTexts();
         changeActivity();
 
-        image_bg.setOnClickListener(new DoubleClickListener() {
+        image_bangabandhu_bg.setOnClickListener(new DoubleClickListener() {
             @Override
             public void onSingleClick(View v) {
 

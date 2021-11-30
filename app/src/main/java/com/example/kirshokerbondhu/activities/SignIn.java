@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +12,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.kirshokerbondhu.R;
+import com.example.kirshokerbondhu.classes.UserInfoClass;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SignIn extends AppCompatActivity {
@@ -39,12 +40,17 @@ public class SignIn extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private String token, default_web_client_ID;
     private FirebaseAuth mAuth;
+    private String user_name;
     private static String PREF_NAME = "is_data_downloaded";
+    private FirebaseUser user;
+    private ArrayList<UserInfoClass> userInfoClasses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        userInfoClasses = new ArrayList<>();
 
         image_bg = findViewById(R.id.image_bg);
         button_signin = findViewById(R.id.button_signin);
@@ -73,30 +79,25 @@ public class SignIn extends AppCompatActivity {
 
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
-//                clearRotationAnimation();
-                Snackbar.make(button_signin, "activity result error: " + e.getLocalizedMessage(), Snackbar.LENGTH_SHORT).show();
+                showSnackBarMessage("activity result error: " + e.getLocalizedMessage());
                 // Google Sign In failed, update UI appropriately
             }
         }
     }
 
     private void getToken() {
-//        Animation rotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continuous_rotation);
-//        rotation.setInterpolator(new LinearInterpolator());
-//        card3.startAnimation(rotation);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("Sign In Request Token").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 token = Objects.requireNonNull(snapshot.getValue()).toString();
-                Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
                 init_GSO();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-                Snackbar.make(button_signin, "Token retrieving error: " + error.getMessage(), Snackbar.LENGTH_SHORT).show();
+                showSnackBarMessage("Token retrieving error: " + error.getMessage());
 
             }
         });
@@ -123,8 +124,7 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-                Snackbar.make(button_signin, error.getMessage(), Snackbar.LENGTH_SHORT).show();
-//                clearRotationAnimation();
+                showSnackBarMessage(error.getMessage());
 
             }
         });
@@ -135,53 +135,62 @@ public class SignIn extends AppCompatActivity {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, Integer.parseInt(token));
-//        launchSomeActivity.launch(signInIntent);
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
-//        Toast.makeText(getApplicationContext(), idToken, Toast.LENGTH_SHORT).show();
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-                        if (prefs.contains("status") && prefs.getInt("status", 0) == 1) {
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
-                            return;
-                        }
-                        int status = prefs.getInt("status", 0);
-                        if (status == 0) {
-                            startActivity(new Intent(getApplicationContext(), DataDownload.class));
-                            finish();
-                            return;
-                        }
+                        checkIfDataIsDownloaded();
+                        user = mAuth.getCurrentUser();
+                        if (Objects.requireNonNull(task.getResult().getAdditionalUserInfo()).isNewUser()) {
+                            if (user != null) {
+                                createUserNode();
+                            }
 
-                        FirebaseUser user = mAuth.getCurrentUser();
-//                            if (Objects.requireNonNull(task.getResult().getAdditionalUserInfo()).isNewUser()) {
-//                                if (user != null) {
-//                                    //You can her set data user in Fire store
-//                                    //Ex: Go to RegisterPage()
-//                                }
-//
-//                            } else {
-//
-//                                //Ex: Go to HomePage()
-//                            }
-//                         Sign in success, update UI with the signed-in user's information
-                        changeActivity();
+                        } else {
+                            checkIfDataIsDownloaded();
+                        }
 
                     } else {
-                        Snackbar.make(button_signin, task.getResult().describeContents(), Snackbar.LENGTH_SHORT).show();
-//                        clearRotationAnimation();
-                        // If sign in fails, display a message to the user.
+                        showSnackBarMessage(String.valueOf(task.getResult().describeContents()));
                     }
                 });
     }
 
-    private void changeActivity() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+    private void checkIfDataIsDownloaded() {
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        if (prefs.contains("status") && prefs.getInt("status", 0) == 1) {
+            changeActivity(new MainActivity());
+            return;
+        }
+        int status = prefs.getInt("status", 0);
+        if (status == 0) {
+            changeActivity(new DataDownload());
+        }
     }
 
+    private void createUserNode() {
+        new Thread(() -> {
+            userInfoClasses.add(new UserInfoClass("null", "null"));
+            user_name = user.getDisplayName();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child("Users").child(user_name).setValue(userInfoClasses.get(0))
+                    .addOnCompleteListener(task -> {
+                        checkIfDataIsDownloaded();
+                    }).addOnCanceledListener(() -> showSnackBarMessage("User creation cancelled. Try again shortly..."))
+                    .addOnFailureListener(e -> showSnackBarMessage(e.getMessage()));
+
+        }).start();
+    }
+
+    private void showSnackBarMessage(String msg) {
+        Snackbar.make(image_bg, msg, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void changeActivity(Object c) {
+        startActivity(new Intent(getApplicationContext(), c.getClass()));
+        finish();
+    }
 }

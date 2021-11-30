@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -115,7 +116,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                     if (!editText.getText().toString().equals(current_phone_num)) {
                         //code here...
                         if (card_save.getVisibility() == View.GONE) {
-                            card_save.setVisibility(View.VISIBLE);
+                            animateSaveCard();
                             image_back.setVisibility(View.GONE);
                             new Handler().postDelayed(() -> animateSaaveButton(), 500);
                         }
@@ -132,7 +133,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 if (!editText.getText().toString().equals(current_location)) {
                     //code here...
                     if (card_save.getVisibility() == View.GONE) {
-                        card_save.setVisibility(View.VISIBLE);
+                        animateSaveCard();
                         image_back.setVisibility(View.GONE);
                         new Handler().postDelayed(() -> animateSaaveButton(), 500);
                     }
@@ -144,7 +145,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                     text_save.setVisibility(View.GONE);
                 }
 
-
             }
 
             @Override
@@ -152,6 +152,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
             }
         });
+    }
+
+    private void animateSaveCard() {
+        card_save.setAlpha(0);
+        card_save.setScaleX(0);
+        card_save.setScaleY(0);
+        card_save.setVisibility(View.VISIBLE);
+        card_save.animate().alpha(1).scaleX(1).scaleY(1).setDuration(500)
+                .setInterpolator(new OvershootInterpolator());
     }
 
     private void animateSaaveButton() {
