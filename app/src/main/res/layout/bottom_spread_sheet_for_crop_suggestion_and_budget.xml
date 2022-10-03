@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="21dp"
-            android:backgroundTint="@color/lightGreen"
+            android:backgroundTint="#49915B"
             android:fontFamily="@font/bontserrat_bold"
             android:hapticFeedbackEnabled="true"
             android:paddingVertical="0dp"

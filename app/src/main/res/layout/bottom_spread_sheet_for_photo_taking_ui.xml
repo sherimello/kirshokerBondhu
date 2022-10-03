@@ -140,7 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="11dp"
-            app:cardBackgroundColor="@color/lightGreen"
+            app:cardBackgroundColor="#49915B"
             app:cardCornerRadius="7dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

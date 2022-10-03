@@ -48,6 +48,7 @@
                     android:animateLayoutChanges="true"
                     android:fitsSystemWindows="true"
                     app:collapsedTitleGravity="end"
+                    android:layout_margin="11dp"
                     app:collapsedTitleTextAppearance="@style/TextAppearance.Expanded"
                     app:contentScrim="?attr/colorPrimary"
                     app:expandedTitleGravity="top"
@@ -57,20 +58,23 @@
                     app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
                     app:title="Welcome Sheri">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:animateLayoutChanges="true"
-                        android:background="@drawable/bottom_left_curve">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:animateLayoutChanges="true"-->
+<!--                        android:layout_marginTop="?actionBarSize"-->
+<!--                        android:background="@drawable/bottom_left_curve">-->
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="11dp"
-                            android:layout_marginTop="100dp"
+                            android:layout_marginTop="111dp"
                             android:layout_marginRight="11dp"
-                            android:layout_marginBottom="100dp"
+                            android:padding="11dp"
+                            android:background="@drawable/bottom_left_curve"
+                            android:layout_marginBottom="0dp"
                             android:animateLayoutChanges="true">
 
                             <androidx.cardview.widget.CardView
@@ -100,8 +104,8 @@
                                 android:layout_margin="11dp"
                                 android:fontFamily="@font/bontserrat_bold"
                                 android:text="@string/dummy_mail"
-                                android:textColor="@color/black"
-                                android:textSize="13sp"
+                                android:textColor="@color/white"
+                                android:textSize="17sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +116,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="11dp"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="11dp"
                                 android:animateLayoutChanges="true"
                                 android:fontFamily="@font/bontserrat_bold"
                                 android:text="@string/privacy_text"
@@ -124,9 +128,6 @@
                                 app:layout_constraintTop_toBottomOf="@+id/text_mail" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    </LinearLayout>
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
@@ -148,9 +149,9 @@
                             android:layout_marginTop="17dp"
                             android:layout_marginEnd="17dp"
                             android:layout_marginBottom="17dp"
+                            android:contentDescription="@string/menu"
                             android:src="@drawable/menu1"
-                            app:tint="@color/greenishGrey"
-                            android:contentDescription="@string/menu" />
+                            app:tint="@color/greenishGrey" />
                     </RelativeLayout>
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -167,7 +168,66 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="11dp"
                     android:animateLayoutChanges="true">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_weather"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="0dp"
+                        app:cardCornerRadius="1000dp"
+                        app:cardBackgroundColor="@color/black"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="11dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/weather"
+                            android:drawableTint="@color/white"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:text="আবহাওয়ার পূর্বাভাস"
+                            android:textSize="15sp"
+                            android:layout_marginStart="17dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginBottom="7dp"
+                            android:textColor="#49915B"
+                            android:drawablePadding="11dp"
+                            android:textStyle="bold" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        app:cardBackgroundColor="#000000"
+                        app:cardCornerRadius="1000dp"
+                        app:cardElevation="0dp"
+                        android:layout_marginStart="11dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/card_weather">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="17dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginBottom="7dp"
+                            android:drawablePadding="11dp"
+                            android:drawableTint="@color/white"
+                            android:fontFamily="@font/bontserrat_bold"
+                            android:text="কৃষি সম্পর্কিত তথ্য"
+                            android:textColor="#49915B"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/info2" />
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/text_username"
@@ -178,8 +238,8 @@
                         android:text="@string/all_services"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toStartOf="@+id/card_info"
+                        app:layout_constraintTop_toBottomOf="@id/card_info" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
@@ -200,8 +260,8 @@
                             android:layout_weight="50"
                             android:outlineAmbientShadowColor="@color/green"
                             android:outlineSpotShadowColor="@color/green"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="17dp"
+                            app:cardBackgroundColor="@color/black"
+                            app:cardCornerRadius="31dp"
                             app:cardElevation="3dp"
                             tools:ignore="UnusedAttribute">
 
@@ -209,7 +269,8 @@
                                 android:id="@+id/constraint_crop_recommendation"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="0dp"
+                                android:layout_margin="7dp"
+                                android:layout_gravity="center"
                                 android:background="?selectableItemBackgroundBorderless"
                                 android:clickable="true"
                                 android:focusable="true">
@@ -221,7 +282,7 @@
                                     android:layout_margin="11dp"
                                     android:fontFamily="@font/bontserrat_bold"
                                     android:text="@string/crop_nrecommendation"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -236,20 +297,21 @@
                                     android:isScrollContainer="true"
                                     android:text="@string/crop_recommendation_desc"
                                     android:textSize="12sp"
+                                    android:textColor="#77ffffff"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
-                                <View
-                                    android:id="@+id/view"
-                                    android:layout_width="4dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/green"
-                                    android:backgroundTint="@color/green"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+<!--                                <View-->
+<!--                                    android:id="@+id/view"-->
+<!--                                    android:layout_width="4dp"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:background="@color/green"-->
+<!--                                    android:backgroundTint="@color/green"-->
+<!--                                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -263,8 +325,8 @@
                             android:layout_weight="50"
                             android:outlineAmbientShadowColor="@color/green"
                             android:outlineSpotShadowColor="@color/green"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="17dp"
+                            app:cardBackgroundColor="@color/black"
+                            app:cardCornerRadius="31dp"
                             app:cardElevation="3dp"
                             tools:targetApi="p">
 
@@ -272,7 +334,8 @@
                                 android:id="@+id/constraint_disease_detection"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="0dp"
+                                android:layout_margin="7dp"
+                                android:layout_gravity="center"
                                 android:background="?selectableItemBackgroundBorderless"
                                 android:clickable="true"
                                 android:focusable="true">
@@ -284,7 +347,7 @@
                                     android:layout_margin="11dp"
                                     android:fontFamily="@font/bontserrat_bold"
                                     android:text="@string/disease_ndiagnosis"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -299,21 +362,10 @@
                                     android:includeFontPadding="false"
                                     android:text="@string/disease_diagnosis_desc"
                                     android:textSize="12sp"
+                                    android:textColor="#77ffffff"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
-                                <View
-                                    android:id="@+id/view2"
-                                    android:layout_width="4dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/green"
-                                    android:backgroundTint="@color/green"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -337,8 +389,8 @@
                             android:layout_weight="50"
                             android:outlineAmbientShadowColor="@color/green"
                             android:outlineSpotShadowColor="@color/green"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="17dp"
+                            app:cardBackgroundColor="@color/black"
+                            app:cardCornerRadius="31dp"
                             app:cardElevation="3dp"
                             tools:targetApi="p">
 
@@ -346,7 +398,8 @@
                                 android:id="@+id/constraint_soil_detection"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="0dp"
+                                android:layout_margin="7dp"
+                                android:layout_gravity="center"
                                 android:background="?selectableItemBackgroundBorderless"
                                 android:clickable="true"
                                 android:focusable="true">
@@ -358,7 +411,7 @@
                                     android:layout_margin="11dp"
                                     android:fontFamily="@font/bontserrat_bold"
                                     android:text="@string/soil_nidentification"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -373,20 +426,10 @@
                                     android:includeFontPadding="false"
                                     android:text="@string/soil_identification_desc"
                                     android:textSize="12sp"
+                                    android:textColor="#77ffffff"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-                                <View
-                                    android:id="@+id/view3"
-                                    android:layout_width="4dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/green"
-                                    android:backgroundTint="@color/green"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -400,8 +443,8 @@
                             android:layout_weight="50"
                             android:outlineAmbientShadowColor="@color/green"
                             android:outlineSpotShadowColor="@color/green"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="17dp"
+                            app:cardBackgroundColor="@color/black"
+                            app:cardCornerRadius="31dp"
                             app:cardElevation="3dp"
                             tools:ignore="UnusedAttribute">
 
@@ -409,7 +452,8 @@
                                 android:id="@+id/constraint_budget_formulation"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="0dp"
+                                android:layout_margin="7dp"
+                                android:layout_gravity="center"
                                 android:background="?selectableItemBackgroundBorderless"
                                 android:clickable="true"
                                 android:focusable="true">
@@ -421,7 +465,7 @@
                                     android:layout_margin="11dp"
                                     android:fontFamily="@font/bontserrat_bold"
                                     android:text="@string/budget_nformulation"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -435,20 +479,10 @@
                                     android:includeFontPadding="false"
                                     android:text="@string/budget_formulation_desc"
                                     android:textSize="12sp"
+                                    android:textColor="#77ffffff"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-                                <View
-                                    android:id="@+id/view4"
-                                    android:layout_width="4dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/green"
-                                    android:backgroundTint="@color/green"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 

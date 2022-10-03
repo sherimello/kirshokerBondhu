@@ -30,6 +30,7 @@ android {
     }
     compileSdkVersion 31
     buildToolsVersion '30.0.3'
+    namespace 'com.example.kirshokerbondhu'
 }
 
 dependencies {

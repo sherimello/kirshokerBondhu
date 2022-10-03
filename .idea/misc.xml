@@ -8,7 +8,7 @@
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/add_phone.xml" value="0.18355263157894736" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/arrow1.xml" value="0.18355263157894736" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/arrow2.xml" value="0.18355263157894736" />
-        <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/bottom_left_curve.xml" value="0.23544303797468355" />
+        <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/bottom_left_curve.xml" value="0.134" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.23544303797468355" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/person2.xml" value="0.18355263157894736" />
         <entry key="..\:/kirshokerBondhu/app/src/main/res/drawable/search.xml" value="0.23544303797468355" />
@@ -35,7 +35,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
