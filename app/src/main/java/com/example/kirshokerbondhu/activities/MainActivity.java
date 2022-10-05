@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private Button button_signout;
     public ImageView image_menu, image_dp;
-    private CardView card_main, card_crop_recommendation, card_budget_formulation;
+    private LinearLayout linear_info;
+    private CardView card_info, card_weather, card_main, card_crop_recommendation, card_budget_formulation;
     private View swipe_view;
     private TextView text_logout, text_mail, text_profile;
     private TypeWriter text_privacy;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ConstraintLayout constraint_soil_detection, constraint_budget_formulation, constraint_disease_detection, constraint_menu_items, constraint_crop_recommendation;
     private Bitmap mIcon_val;
     private URL newurl = null;
-    private int counter = 0;
+    private int counter = 0, make_info_visible = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button_signout = findViewById(R.id.button_signout);
         image_menu = findViewById(R.id.image_menu);
+        linear_info = findViewById(R.id.linear_info);
         image_dp = findViewById(R.id.image_dp);
         card_main = findViewById(R.id.card_main);
+        card_weather = findViewById(R.id.card_weather);
+        card_info = findViewById(R.id.card_info);
         swipe_view = findViewById(R.id.swipe_view);
         text_logout = findViewById(R.id.text_logout);
         text_mail = findViewById(R.id.text_mail);
@@ -81,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_signout.setOnClickListener(view -> signOut());
         image_menu.setOnClickListener(this);
         card_crop_recommendation.setOnClickListener(this);
+        card_weather.setOnClickListener(this);
+        card_info.setOnClickListener(this);
         constraint_crop_recommendation.setOnClickListener(this);
         constraint_disease_detection.setOnClickListener(this);
         constraint_budget_formulation.setOnClickListener(this);
@@ -158,6 +165,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        if (v == card_info) {
+            if (linear_info.getAlpha() == 0) {
+                linear_info.setVisibility(View.VISIBLE);
+                linear_info.animate().alpha(1).setDuration(500);
+            }
+        }
+
+        if (v == card_weather) {
+            startActivity(new Intent(getApplicationContext(), Weather.class));
+            finish();
+        }
         if (v == text_profile) {
             final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
                     this,
@@ -222,7 +241,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (swipe_view.getVisibility() == View.VISIBLE) {
             resetMainCardFromMenuExpansionAnimation();
-        } else
+        }
+        if (linear_info.getVisibility() == View.VISIBLE) {
+            linear_info.animate().alpha(0).setDuration(500);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+//                    linear_info.setVisibility(View.GONE);
+                }
+            }, 1000);
+        }
+        else
             finishAffinity();
     }
 }
