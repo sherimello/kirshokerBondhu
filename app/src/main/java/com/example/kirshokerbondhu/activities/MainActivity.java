@@ -21,7 +21,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.kirshokerbondhu.R;
 import com.example.kirshokerbondhu.classes.OnSwipeTouchListener;
 import com.example.kirshokerbondhu.classes.TypeWriter;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private Button button_signout;
+    private ImageView image_bg;
     public ImageView image_menu, image_dp;
     private LinearLayout linear_info;
     private CardView card_info, card_weather, card_main, card_crop_recommendation, card_budget_formulation;
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button_signout = findViewById(R.id.button_signout);
         image_menu = findViewById(R.id.image_menu);
+        image_bg = findViewById(R.id.image_bg);
         linear_info = findViewById(R.id.linear_info);
         image_dp = findViewById(R.id.image_dp);
         card_main = findViewById(R.id.card_main);
@@ -82,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         card_budget_formulation = findViewById(R.id.card_budget_formulation);
 
         setUpHeaderInfo();
+
+        Glide.with(this)
+                .load(ResourcesCompat.getDrawable(getResources(), R.drawable.grass, null))
+                .disallowHardwareConfig()
+                .into(image_bg);
 
         button_signout.setOnClickListener(view -> signOut());
         image_menu.setOnClickListener(this);
@@ -244,12 +253,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (linear_info.getVisibility() == View.VISIBLE) {
             linear_info.animate().alpha(0).setDuration(500);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-//                    linear_info.setVisibility(View.GONE);
-                }
-            }, 1000);
         }
         else
             finishAffinity();

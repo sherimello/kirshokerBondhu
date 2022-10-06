@@ -27,7 +27,7 @@
         <item name="android:fontFamily">@font/bontserrat_bold</item>
         <item name="backgroundColor">#ffffff</item>
         <item name="android:textColorPrimary">#ffffff</item>
-        <item name="android:textColor">@color/greenishGrey</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme"

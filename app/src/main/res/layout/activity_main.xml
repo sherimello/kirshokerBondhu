@@ -23,6 +23,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/image_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha=".35"
+            android:contentDescription="@string/splash_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/grass"
+            android:transitionName="@string/Continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@color/white"
+                android:background="@color/transparent"
                 android:fitsSystemWindows="true"
                 android:translationZ="0.1dp"
                 app:elevation="0dp">
@@ -47,12 +62,12 @@
                     android:layout_height="match_parent"
                     android:animateLayoutChanges="true"
                     android:fitsSystemWindows="true"
-                    app:collapsedTitleGravity="end"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginEnd="7dp"
+                    app:collapsedTitleGravity="center"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
                     android:layout_marginTop="7dp"
                     app:collapsedTitleTextAppearance="@style/TextAppearance.Expanded"
-                    app:contentScrim="?attr/colorPrimary"
+                    app:contentScrim="#009688"
                     app:expandedTitleGravity="top"
                     app:expandedTitleMarginStart="17dp"
                     app:expandedTitleMarginTop="49dp"
@@ -64,7 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="7dp"
-                            android:layout_marginTop="110dp"
+                            android:layout_marginTop="100dp"
                             android:layout_marginRight="7dp"
                             android:padding="7dp"
                             android:background="@drawable/bottom_left_curve"
