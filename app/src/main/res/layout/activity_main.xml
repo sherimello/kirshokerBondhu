@@ -27,7 +27,7 @@
             android:id="@+id/image_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha=".35"
+            android:alpha=".0"
             android:contentDescription="@string/splash_background"
             android:scaleType="centerCrop"
             android:src="@drawable/grass"
@@ -78,9 +78,9 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="7dp"
+                            android:layout_marginLeft="11dp"
                             android:layout_marginTop="100dp"
-                            android:layout_marginRight="7dp"
+                            android:layout_marginRight="11dp"
                             android:padding="7dp"
                             android:background="@drawable/bottom_left_curve"
                             android:layout_marginBottom="0dp"
@@ -564,7 +564,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.945"
-        app:layout_constraintWidth_percent=".5"
+        app:layout_constraintWidth_percent=".65"
         tools:rotation="0"
         tools:translationX="0dp">
         <!--        ●-->
@@ -606,6 +606,7 @@
             android:fontFamily="@font/bontserrat_bold"
             android:gravity="center"
             android:text="@string/history"
+            app:layout_constraintHorizontal_bias="0.21"
             android:textColor="@color/greenishGrey"
             android:textSize="17sp"
             app:drawableStartCompat="@drawable/history"
@@ -616,12 +617,37 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/text_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/notification"
+            android:drawablePadding="7dp"
+            android:fontFamily="@font/bontserrat_bold"
+            android:text="দুর্যোগ\nবিজ্ঞপ্তি"
+            android:textColor="@color/black"
+            android:layout_marginTop="19dp"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@id/text_history"
+            app:layout_constraintTop_toBottomOf="@+id/text_history" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/text_history"
+            app:layout_constraintTop_toTopOf="@+id/text_notification"
+            android:layout_marginStart="17dp"
+            app:layout_constraintBottom_toBottomOf="@id/text_notification"
+            app:thumbTint="@color/greenishGrey"
+            app:trackTint="#55009688" />
+
+        <TextView
             android:id="@+id/text_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
             android:layout_marginEnd="7dp"
             android:layout_marginBottom="7dp"
+            android:layout_marginTop="19dp"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:drawablePadding="7dp"
@@ -637,7 +663,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/text_history"
-            app:layout_constraintTop_toBottomOf="@+id/text_history"
+            app:layout_constraintTop_toBottomOf="@+id/switch_notification"
             app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

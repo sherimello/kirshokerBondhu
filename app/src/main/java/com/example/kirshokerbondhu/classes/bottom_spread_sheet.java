@@ -54,6 +54,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
     private TextView text_reason_tag;
     private ImageView image_selected_picture, image_selected_picture_round;
     private CardView card_open_camera, card_open_gallery, card_selected_picture;
+    private View view_gallery_left, view_gallery_right, view_camera_left, view_camera_right;
     private TypeWriter text_verdict, text_reason, text_disease_name, text_suggestions;
     private RadioButton radio_paddy, radio_others;
     private SharedPrefs sharedPrefs;
@@ -133,6 +134,10 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
 
         card_open_camera = v.findViewById(R.id.card_open_camera);
         card_open_gallery = v.findViewById(R.id.card_open_gallery);
+        view_camera_left = v.findViewById(R.id.view_camera_left);
+        view_camera_right = v.findViewById(R.id.view_camera_right);
+        view_gallery_left = v.findViewById(R.id.view_gallery_left);
+        view_gallery_right = v.findViewById(R.id.view_gallery_right);
         image_selected_picture = v.findViewById(R.id.image_selected_picture);
         image_selected_picture_round = v.findViewById(R.id.image_selected_picture_round);
         relative_selected_picture = v.findViewById(R.id.relative_selected_picture);
@@ -140,8 +145,10 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         text_disease_name = v.findViewById(R.id.text_disease_name);
         card_selected_picture = v.findViewById(R.id.card_selected_picture);
 
-        card_open_camera.setOnClickListener(this);
-        card_open_gallery.setOnClickListener(this);
+        view_camera_left.setOnClickListener(this);
+        view_camera_right.setOnClickListener(this);
+        view_gallery_left.setOnClickListener(this);
+        view_gallery_right.setOnClickListener(this);
 
         return v;
     }
@@ -220,31 +227,44 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
 
                         text_disease_name.setLetterSpacing(0f);
                         text_disease_name.setCharacterDelay(41);
+                        text_suggestions.setVisibility(View.VISIBLE);
+                        text_suggestions.setCharacterDelay(21);
 
-                        if (simulation_count == 1) {
+                        if (Objects.equals(direction, "left")) {
                             text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
-                                text_disease_name.setText(getText(R.string.clay));
+                                text_disease_name.setText(getText(R.string.doash_mati));
+                                text_suggestions.setAnimationCompleteListener(new Handler(
+                                        msg1 -> {
+                                            text_suggestions.setText(R.string.doash_mati_info);
+                                            return false;
+                                        }));
+                                text_suggestions.animateText(getText(R.string.doash_mati_info));
                                 return false;
                             }));
-                            text_disease_name.animateText(getText(R.string.clay));
+                            text_disease_name.animateText(getText(R.string.doash_mati));
                         } else {
                             text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
-                                text_disease_name.setText(getText(R.string.slit_soil));
+                                text_disease_name.setText(getText(R.string.sandy_soil));
+                                text_suggestions.setAnimationCompleteListener(new Handler(
+                                        msg1 -> {
+                                            text_suggestions.setText(R.string.sandy_soil_info);
+                                            return false;
+                                        }));
+                                text_suggestions.animateText(getText(R.string.sandy_soil_info));
                                 return false;
                             }));
-                            text_disease_name.animateText(getText(R.string.slit_soil));
+                            text_disease_name.animateText(getText(R.string.sandy_soil));
                         }
                     }
-
 
                     if (tag.equals("disease detection1") || tag.equals("disease detection2")) {
                         text_suggestions.setVisibility(View.VISIBLE);
                         text_disease_name.setLetterSpacing(0f);
                         text_disease_name.setCharacterDelay(41);
                         text_suggestions.setCharacterDelay(21);
-                        if (simulation_count == 1) {
+                        if (Objects.equals(direction, "left")) {
                             text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
-                                text_disease_name.setText(getText(R.string.hispa));
+                                text_disease_name.setText(R.string.hispa);
                                 return false;
                             }));
                             text_suggestions.setAnimationCompleteListener(new Handler(msg -> {
@@ -255,14 +275,14 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                             text_suggestions.animateText(getString(R.string.hispa_suggestion));
                         } else {
                             text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
-                                text_disease_name.setText(getString(R.string.brownspot));
+                                text_disease_name.setText(R.string.brownspot);
                                 return false;
                             }));
                             text_suggestions.setAnimationCompleteListener(new Handler(msg -> {
                                 text_suggestions.setText(R.string.brownspot_suggestion);
                                 return false;
                             }));
-                            text_disease_name.animateText(getString(R.string.brownspot));
+                            text_disease_name.animateText(getText(R.string.brownspot));
                             text_suggestions.animateText(getString(R.string.brownspot_suggestion));
                         }
                     }
@@ -277,12 +297,46 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                 image_selected_picture.getLayoutParams().height
                         = nMaxScreenHeight;
                 new Handler().postDelayed(() -> {
+                    if (tag.equals("soil detection1") || tag.equals("soil detection2")) {
+
+                        text_disease_name.setLetterSpacing(0f);
+                        text_disease_name.setCharacterDelay(41);
+                        text_suggestions.setVisibility(View.VISIBLE);
+                        text_suggestions.setCharacterDelay(21);
+
+                        if (Objects.equals(direction, "left")) {
+                            text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
+                                text_disease_name.setText(getText(R.string.doash_mati));
+                                text_suggestions.setAnimationCompleteListener(new Handler(
+                                        msg1 -> {
+                                            text_suggestions.setText(R.string.doash_mati_info);
+                                            return false;
+                                        }));
+                                text_suggestions.animateText(getText(R.string.doash_mati_info));
+                                return false;
+                            }));
+                            text_disease_name.animateText(getText(R.string.doash_mati));
+                        } else {
+                            text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
+                                text_disease_name.setText(getText(R.string.sandy_soil));
+                                text_suggestions.setAnimationCompleteListener(new Handler(
+                                        msg1 -> {
+                                            text_suggestions.setText(R.string.sandy_soil_info);
+                                            return false;
+                                        }));
+                                text_suggestions.animateText(getText(R.string.sandy_soil_info));
+                                return false;
+                            }));
+                            text_disease_name.animateText(getText(R.string.sandy_soil));
+                        }
+                    }
+
                     if (tag.equals("disease detection1") || tag.equals("disease detection2")) {
                         text_suggestions.setVisibility(View.VISIBLE);
                         text_disease_name.setLetterSpacing(0f);
                         text_disease_name.setCharacterDelay(41);
                         text_suggestions.setCharacterDelay(21);
-                        if (simulation_count == 1) {
+                        if (Objects.equals(direction, "left")) {
                             text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
                                 text_disease_name.setText(R.string.hispa);
                                 return false;
@@ -291,18 +345,18 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                                 text_suggestions.setText(R.string.hispa_suggestion);
                                 return false;
                             }));
-                            text_disease_name.animateText("Hispa");
+                            text_disease_name.animateText(getText(R.string.hispa));
                             text_suggestions.animateText(getString(R.string.hispa_suggestion));
                         } else {
                             text_disease_name.setAnimationCompleteListener(new Handler(msg -> {
-                                text_disease_name.setText("BrownSpot");
+                                text_disease_name.setText(R.string.brownspot);
                                 return false;
                             }));
                             text_suggestions.setAnimationCompleteListener(new Handler(msg -> {
                                 text_suggestions.setText(R.string.brownspot_suggestion);
                                 return false;
                             }));
-                            text_disease_name.animateText("BrownSpot");
+                            text_disease_name.animateText(getText(R.string.brownspot));
                             text_suggestions.animateText(getString(R.string.brownspot_suggestion));
                         }
                     }
@@ -355,8 +409,30 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         return (new Random()).nextInt((max - min) + 1) + min;
     }
 
+    String direction;
+
     @Override
     public void onClick(View v) {
+        if (v == view_camera_left) {
+            dispatchTakePictureIntent();
+            direction = "left";
+        }
+
+        if (v == view_camera_right) {
+            dispatchTakePictureIntent();
+            direction = "right";
+        }
+
+        if (v == view_gallery_right) {
+            dispatchTakeGalleryIntent();
+            direction = "right";
+        }
+
+        if (v == view_gallery_left) {
+            dispatchTakeGalleryIntent();
+            direction = "left";
+        }
+
         if (v == button_check) {
             checkIfInputsAreOK();
         }

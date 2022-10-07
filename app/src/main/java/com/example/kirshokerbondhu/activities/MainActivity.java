@@ -4,23 +4,31 @@ import static android.content.res.Resources.getSystem;
 
 import android.animation.ObjectAnimator;
 import android.app.ActivityOptions;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Pair;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.bumptech.glide.Glide;
@@ -53,8 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CollapsingToolbarLayout collapsing_toolbar;
     private ConstraintLayout constraint_soil_detection, constraint_budget_formulation, constraint_disease_detection, constraint_menu_items, constraint_crop_recommendation;
     private Bitmap mIcon_val;
+    private SwitchCompat aSwitch;
     private URL newurl = null;
     private int counter = 0, make_info_visible = 0;
+    public static final int NOTIFICATION_CHANNEL_ID = 10001 ;
+    private final static String default_notification_channel_id = "default" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image_menu = findViewById(R.id.image_menu);
         image_bg = findViewById(R.id.image_bg);
         linear_info = findViewById(R.id.linear_info);
+        aSwitch = findViewById(R.id.switch_notification);
         image_dp = findViewById(R.id.image_dp);
         card_main = findViewById(R.id.card_main);
         card_weather = findViewById(R.id.card_weather);
@@ -93,6 +105,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .into(image_bg);
 
         button_signout.setOnClickListener(view -> signOut());
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked()) {
+                    Toast.makeText(MainActivity.this, "on", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(() -> {
+                        notification();
+                    }, 3000);
+                }
+            }
+        });
+
         image_menu.setOnClickListener(this);
         card_crop_recommendation.setOnClickListener(this);
         card_weather.setOnClickListener(this);
@@ -113,6 +138,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    private void notification(){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("disaster notification", "disaster notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        Intent resultIntent = new Intent(this, Weather.class);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "disaster notification");
+        builder.setContentTitle("প্রাকিতিক দূর্যোগ");
+        builder.setContentText("আজ রাতে টর্নেডোর সম্ভাবনা আছে...");
+        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setAutoCancel(true);
+        builder.setContentIntent(resultPendingIntent);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getApplicationContext());
+        managerCompat.notify(1, builder.build());
     }
 
     private void resetMainCardFromMenuExpansionAnimation() {

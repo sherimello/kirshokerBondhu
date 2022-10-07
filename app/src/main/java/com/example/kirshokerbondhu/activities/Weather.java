@@ -34,7 +34,6 @@ public class Weather extends AppCompatActivity {
         web_weather.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
                 view.loadUrl(url);
                 return true;
             }
