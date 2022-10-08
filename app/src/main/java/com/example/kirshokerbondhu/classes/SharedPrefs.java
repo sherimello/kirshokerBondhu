@@ -34,8 +34,25 @@ public class SharedPrefs {
         editor.putString(key, json);
         editor.apply();
     }
+    public void saveIntArrayList(Context context, ArrayList<Integer> list, String key) {
+        SharedPreferences prefs = context.getSharedPreferences("Data Pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        editor.putString(key, json);
+        editor.apply();
+    }
 
     public ArrayList<String> getArrayList(Context context, String key) {
+        SharedPreferences prefs = context.getSharedPreferences("Data Pref", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return gson.fromJson(json, type);
+    }
+
+    public ArrayList<Integer> getIntArrayList(Context context, String key) {
         SharedPreferences prefs = context.getSharedPreferences("Data Pref", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString(key, null);

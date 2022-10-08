@@ -43,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -68,6 +69,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
             DISEASE_IDENTIFICATION = "disease detection", SOIL_IDENTIFICATION = "soil detection";
     private double obtained_local_temp = 0.0, obtained_chances_of_rain = 0.0, obtained_chances_of_flood = 0.0, L_Temp = 0.0, U_Temp = 0.0;
     private int nMaxScreenHeight;
+
 
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
@@ -402,6 +404,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                 android.R.layout.simple_dropdown_item_1line, sharedPrefs.getArrayList(requireContext(), "locations"));
 
         edit_area.setAdapter(adapter);
+
         adapter.notifyDataSetChanged();
     }
 
@@ -485,20 +488,73 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         text_verdict.animateText("•••");
 
         if (tag.equals(BUDGET_FORMATION)) {
-            String val = String.valueOf(getRandomNumber(100000, 150000));
-            new Handler().postDelayed(() -> {
-                text_verdict.setText("");
-                text_verdict.animationCompleteCallBack = null;
-                text_verdict.setLetterSpacing(0f);
-                text_verdict.setCharacterDelay(51);
-                text_verdict.removeCallbacks(() -> text_verdict.animateText("•••"));
-                text_verdict.setAnimationCompleteListener(new Handler(msg -> {
 
-                    text_verdict.setText(MessageFormat.format("{0}৳", val));
-                    return false;
-                }));
-                text_verdict.animateText(val + "৳");
-            }, 4501);
+            String loc = edit_area.getText().toString().trim();
+
+            if (loc.contains(" "))
+                loc = edit_area.getText().toString().trim().substring(0, edit_area.getText().toString().trim().indexOf(" "));
+
+            if (loc.equals("বরিশাল")) {
+                loc = "Barisal";
+            }
+            if (loc.equals("চট্টগ্রাম")) {
+                loc = "Chattogram";
+            }
+            if (loc.equals("ঢাকা")) {
+                loc = "Dhaka";
+            }
+            if (loc.equals("খুলনা")) {
+                loc = "Khulna";
+            }
+            if (loc.equals("রাজশাহী")) {
+                loc = "Rajshahi";
+            }
+            if (loc.equals("সিলেট")) {
+                loc = "Sylhet";
+            }
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Cost Per Acre");
+            String finalLoc = loc;
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String val = Objects.requireNonNull(snapshot.child(finalLoc).getValue()).toString();
+                    String acres = edit_land_area.getText().toString().trim();
+                    int acres_num = Integer.parseInt(acres);
+                    int val_num_unit = Integer.parseInt(val);
+                    int val_num = val_num_unit * acres_num;
+                    DecimalFormat f = new DecimalFormat("##.00");
+                    new Handler().postDelayed(() -> {
+                        text_verdict.setText("");
+                        text_verdict.animationCompleteCallBack = null;
+                        text_verdict.setLetterSpacing(0f);
+                        text_verdict.setCharacterDelay(51);
+                        text_reason.setCharacterDelay(21);
+                        text_reason.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        text_verdict.removeCallbacks(() -> text_verdict.animateText("•••"));
+                        text_verdict.setAnimationCompleteListener(new Handler(
+                                msg -> {
+                                    text_verdict.setText(MessageFormat.format("মোট: {0}৳", String.valueOf(val_num)));
+                                    text_reason.setAnimationCompleteListener(new Handler(
+                                            msg1 -> {
+                                                text_reason.setText(MessageFormat.format("পারিশ্রমিক বাবদ: {0}৳\nচারা তোলা বাবদ: {1}৳\nরোপন: {2}৳\nসেচ বাবদ: {3}৳\nসার বাবদ: {4}৳\nনিরানি বাবদ: {5}৳\nকীটনাশক: {6}৳\nফসল কাঁটা বাবদ: {7}৳\nপরিবহন: {8}৳\nঅন্যান্য: {9}৳\n\n\n", f.format(val_num * 0.0474), f.format(val_num * 0.0107), f.format(val_num * 0.0685), f.format(val_num * 0.0213), f.format(val_num * 0.0870), f.format(val_num * 0.1227), f.format(val_num * 0.0202), f.format(val_num * 0.1183), f.format(val_num * 0.0544), f.format(val_num * 0.0214)));
+                                                return false;
+                                            }));
+                                    text_reason.animateText(MessageFormat.format("পারিশ্রমিক বাবদ: {0}৳\nচারা তোলা বাবদ: {1}৳\nরোপন: {2}৳\nসেচ বাবদ: {3}৳\nসার বাবদ: {4}৳\nনিরানি বাবদ: {5}৳\nকীটনাশক: {6}৳\nফসল কাঁটা বাবদ: {7}৳\nপরিবহন: {8}৳\nঅন্যান্য: {9}৳\n\n\n", f.format(val_num * 0.0474), f.format(val_num * 0.0107), f.format(val_num * 0.0685), f.format(val_num * 0.0213), f.format(val_num * 0.0870), f.format(val_num * 0.1227), f.format(val_num * 0.0202), f.format(val_num * 0.1183), f.format(val_num * 0.0544), f.format(val_num * 0.0214)));
+                                    return false;
+                                }
+                        ));
+                        text_verdict.animateText("মোট: " + val + "৳");
+                    }, 3001);
+                    Toast.makeText(requireContext(), val, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+//            String val = String.valueOf(getRandomNumber(100000, 150000));
+
             return;
         }
 

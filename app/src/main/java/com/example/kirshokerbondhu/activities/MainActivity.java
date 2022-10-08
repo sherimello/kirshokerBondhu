@@ -34,6 +34,7 @@ import androidx.core.content.res.ResourcesCompat;
 import com.bumptech.glide.Glide;
 import com.example.kirshokerbondhu.R;
 import com.example.kirshokerbondhu.classes.OnSwipeTouchListener;
+import com.example.kirshokerbondhu.classes.SharedPrefs;
 import com.example.kirshokerbondhu.classes.TypeWriter;
 import com.example.kirshokerbondhu.classes.bottom_spread_sheet;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -44,6 +45,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -97,6 +99,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         card_crop_recommendation = findViewById(R.id.card_crop_recommendation);
         card_budget_formulation = findViewById(R.id.card_budget_formulation);
 
+        SharedPrefs sharedPrefs = new SharedPrefs();
+
+        ArrayList<Integer> temp = sharedPrefs.getIntArrayList(getApplicationContext(), "cost per acre");
+        StringBuilder s = new StringBuilder();
+//        for (int i = 0; i<temp.size(); i++) {
+//            s.append(temp.get(i).toString()).append(" ");
+//        }
+        Toast.makeText(getApplicationContext(), String.valueOf(temp.get(0)), Toast.LENGTH_SHORT).show();
         setUpHeaderInfo();
 
         Glide.with(this)

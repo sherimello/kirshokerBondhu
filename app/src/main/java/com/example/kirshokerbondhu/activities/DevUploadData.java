@@ -15,6 +15,9 @@ public class DevUploadData extends AppCompatActivity {
     private Button button_upload;
     private int counter = 1, chance_counter = 1;
     private double[] temps = {15.67, 34.44, 21.00, 35.10, 14.77, 27.1, 30.04}, chances_of_rainfall = {21.3, 36.7, 35.0, 63.2, 90.5, 23.1, 33.95, 50.0, 60.3, 91.0, 10.0, 27.7, 50.0, 57.0, 99.0, 30.0, 40.0, 50.0, 65.0, 65.0, 9.0, 13.0, 39.95, 64.13, 70.0};
+    private String[] divisions = {
+      "Barisal (বরিশাল)", "Chattogram (চট্টগ্রাম)", "Dhaka (ঢাকা)", "Khulna (খুলনা)", "Rajshahi (রাজশাহী)", "Sylhet (সিলেট)"
+    };
     private String[] list = {"Dhaka",
             "Faridpur",
             "Gazipur",
@@ -95,7 +98,7 @@ public class DevUploadData extends AppCompatActivity {
     }
 
     private void uploadMonthlyChancesOfRainfallPerLocation(DatabaseReference databaseReference) {
-        for (String s : list) {
+        for (String s : divisions) {
             for (double d2 : chances_of_rainfall) {
                 databaseReference.child("Chances Of Rainfall").child(s)
                         .child(String.valueOf(chance_counter))
@@ -111,7 +114,7 @@ public class DevUploadData extends AppCompatActivity {
         }
     }
     private void uploadMonthlyChancesOfFloodPerLocation(DatabaseReference databaseReference) {
-        for (String s : list) {
+        for (String s : divisions) {
             for (double d2 : chances_of_rainfall) {
                 databaseReference.child("Chances Of Flood").child(s)
                         .child(String.valueOf(chance_counter))
@@ -128,7 +131,7 @@ public class DevUploadData extends AppCompatActivity {
     }
 
     private void uploadTemperatures(DatabaseReference databaseReference) {
-        for (String s : list) {
+        for (String s : divisions) {
             for (double d : temps) {
                 databaseReference.child("Temperatures").child(s).child(String.valueOf(counter)).setValue(d);
                 counter++;
@@ -138,7 +141,7 @@ public class DevUploadData extends AppCompatActivity {
     }
 
     private void uploadLocation(DatabaseReference databaseReference) {
-        for (String s : list) {
+        for (String s : divisions) {
             databaseReference.child("Location").child(String.valueOf(counter))
                     .setValue(s);
             counter++;
