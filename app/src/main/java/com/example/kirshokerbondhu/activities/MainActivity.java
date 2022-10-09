@@ -99,14 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         card_crop_recommendation = findViewById(R.id.card_crop_recommendation);
         card_budget_formulation = findViewById(R.id.card_budget_formulation);
 
-        SharedPrefs sharedPrefs = new SharedPrefs();
-
-        ArrayList<Integer> temp = sharedPrefs.getIntArrayList(getApplicationContext(), "cost per acre");
-        StringBuilder s = new StringBuilder();
-//        for (int i = 0; i<temp.size(); i++) {
-//            s.append(temp.get(i).toString()).append(" ");
-//        }
-        Toast.makeText(getApplicationContext(), String.valueOf(temp.get(0)), Toast.LENGTH_SHORT).show();
         setUpHeaderInfo();
 
         Glide.with(this)
@@ -157,9 +149,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             manager.createNotificationChannel(channel);
         }
         Intent resultIntent = new Intent(this, Weather.class);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "disaster notification");
-        builder.setContentTitle("প্রাকিতিক দূর্যোগ");
+        builder.setContentTitle("প্রাকৃতিক দূর্যোগ");
         builder.setContentText("আজ রাতে টর্নেডোর সম্ভাবনা আছে...");
         builder.setSmallIcon(R.drawable.ic_launcher_background);
         builder.setAutoCancel(true);
@@ -186,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setUpHeaderInfo() {
         setUserPicture();
-        collapsing_toolbar.setTitle("স্বাগত " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
+        collapsing_toolbar.setTitle("স্বাগতম " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
         text_mail.setText(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail());
         text_privacy.setCharacterDelay(21);
         text_privacy.animateText(getString(R.string.privacy_text));

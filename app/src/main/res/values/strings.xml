@@ -24,7 +24,7 @@
     <string name="logout">লগআউট</string>
     <string name="crop_name">ফসলের নাম</string>
     <string name="area">এলাকা</string>
-    <string name="land_area">জমির আয়তন (কাঠা)</string>
+    <string name="land_area">জমির আয়তন (একর)</string>
     <string name="hint_crop_name_strawberry">যেমন স্ট্রবেরি</string>
     <string name="hint_crop_name_aus">যেমন আউশ</string>
     <string name="hint_area">যেমন চট্টগ্রাম</string>
@@ -45,13 +45,13 @@
     <string name="user_image">user image</string>
     <string name="menu">menu</string>
     <string name="all_services">সমস্ত পরিষেবা:</string>
-    <string name="crop_nrecommendation">ফসলের   \n সুপারিশ</string>
+    <string name="crop_nrecommendation">ফসলের\nসুপারিশ</string>
     <string name="crop_recommendation_desc">আবহাওয়ার তথ্য এবং পূর্বাভাসের বিশ্লেষণ প্রতিবেদনের ভিত্তিতে ফসলের সুপারিশ পান।</string>
-    <string name="disease_ndiagnosis">রোগ   \n নির্ণয়</string>
+    <string name="disease_ndiagnosis">রোগ\nনির্ণয়</string>
     <string name="disease_diagnosis_desc">আপনার ফসলের একটি ছবি ক্যাপচার করে এবং আপলোড করার মাধ্যমে আপনার ফসলে কোন রোগে আক্রান্ত হয়েছে তা শনাক্ত করুন।</string>
-    <string name="soil_nidentification">মাটি   \n সনাক্তকরণ</string>
+    <string name="soil_nidentification">মাটি\nসনাক্তকরণ</string>
     <string name="soil_identification_desc">আপনার জমির মাটির ধরন শনাক্ত করুন, শুধু মাটির ছবি তুলে আপলোড করে।</string>
-    <string name="budget_nformulation">বাজেট   \n প্রণয়ন</string>
+    <string name="budget_nformulation">বাজেট\nপ্রণয়ন</string>
     <string name="budget_formulation_desc">পরবর্তী কৃষি অধিবেশনের জন্য বাজেট প্রণয়নে সহায়তা পান।</string>
     <string name="log_out">লগআউট</string>
     <string name="punch_hole_image">punch hole image</string>

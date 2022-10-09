@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -477,6 +478,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         params.horizontalBias = 0.5f; // here is one modification for example. modify anything else you want :)
         text_verdict.setLayoutParams(params); // request the view to use the new modified params
         text_verdict.setVisibility(View.VISIBLE);
+        text_verdict.setTextColor(Color.parseColor("#009688"));
         text_verdict.setLetterSpacing(0.3f);
         text_verdict.setCharacterDelay(401);
         text_verdict.animationCompleteCallBack = null;
@@ -487,53 +489,33 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         }));
         text_verdict.animateText("•••");
 
+        getCleanLocation();
+
         if (tag.equals(BUDGET_FORMATION)) {
 
-            String loc = edit_area.getText().toString().trim();
-
-            if (loc.contains(" "))
-                loc = edit_area.getText().toString().trim().substring(0, edit_area.getText().toString().trim().indexOf(" "));
-
-            if (loc.equals("বরিশাল")) {
-                loc = "Barisal";
-            }
-            if (loc.equals("চট্টগ্রাম")) {
-                loc = "Chattogram";
-            }
-            if (loc.equals("ঢাকা")) {
-                loc = "Dhaka";
-            }
-            if (loc.equals("খুলনা")) {
-                loc = "Khulna";
-            }
-            if (loc.equals("রাজশাহী")) {
-                loc = "Rajshahi";
-            }
-            if (loc.equals("সিলেট")) {
-                loc = "Sylhet";
-            }
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Cost Per Acre");
-            String finalLoc = loc;
+            String finalLoc = getCleanLocation();
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String val = Objects.requireNonNull(snapshot.child(finalLoc).getValue()).toString();
                     String acres = edit_land_area.getText().toString().trim();
-                    int acres_num = Integer.parseInt(acres);
-                    int val_num_unit = Integer.parseInt(val);
-                    int val_num = val_num_unit * acres_num;
                     DecimalFormat f = new DecimalFormat("##.00");
+                    double acres_num = Double.parseDouble(acres);
+                    int val_num_unit = Integer.parseInt(val);
+                    double val_num = val_num_unit * acres_num;
                     new Handler().postDelayed(() -> {
                         text_verdict.setText("");
                         text_verdict.animationCompleteCallBack = null;
                         text_verdict.setLetterSpacing(0f);
+                        text_verdict.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        text_reason.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                         text_verdict.setCharacterDelay(51);
                         text_reason.setCharacterDelay(21);
-                        text_reason.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                         text_verdict.removeCallbacks(() -> text_verdict.animateText("•••"));
                         text_verdict.setAnimationCompleteListener(new Handler(
                                 msg -> {
-                                    text_verdict.setText(MessageFormat.format("মোট: {0}৳", String.valueOf(val_num)));
+                                    text_verdict.setText(MessageFormat.format("মোট: {0}৳", f.format(val_num)));
                                     text_reason.setAnimationCompleteListener(new Handler(
                                             msg1 -> {
                                                 text_reason.setText(MessageFormat.format("পারিশ্রমিক বাবদ: {0}৳\nচারা তোলা বাবদ: {1}৳\nরোপন: {2}৳\nসেচ বাবদ: {3}৳\nসার বাবদ: {4}৳\nনিরানি বাবদ: {5}৳\nকীটনাশক: {6}৳\nফসল কাঁটা বাবদ: {7}৳\nপরিবহন: {8}৳\nঅন্যান্য: {9}৳\n\n\n", f.format(val_num * 0.0474), f.format(val_num * 0.0107), f.format(val_num * 0.0685), f.format(val_num * 0.0213), f.format(val_num * 0.0870), f.format(val_num * 0.1227), f.format(val_num * 0.0202), f.format(val_num * 0.1183), f.format(val_num * 0.0544), f.format(val_num * 0.0214)));
@@ -543,9 +525,9 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                                     return false;
                                 }
                         ));
-                        text_verdict.animateText("মোট: " + val + "৳");
-                    }, 3001);
-                    Toast.makeText(requireContext(), val, Toast.LENGTH_SHORT).show();
+                        text_verdict.animateText("মোট: " + f.format(val_num) + "৳");
+                    }, 0);
+//                    Toast.makeText(requireContext(), val, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -558,15 +540,114 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
             return;
         }
 
-        if (counter > 0) {
-            new Handler().postDelayed(() -> {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                getLocationTemperature(databaseReference);
-            }, 2000);
-            return;
+        giveCropSuggestion(getCleanLocation());
+
+//        if (counter > 0) {
+//            new Handler().postDelayed(() -> {
+//                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//                getLocationTemperature(databaseReference);
+//            }, 2000);
+//            return;
+//        }
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//        getLocationTemperature(databaseReference);
+    }
+
+    private String getCleanLocation() {
+        String loc = edit_area.getText().toString().trim();
+
+        if (loc.contains(" "))
+            loc = edit_area.getText().toString().trim().substring(0, edit_area.getText().toString().trim().indexOf(" "));
+
+        if (loc.equals("বরিশাল")) {
+            loc = "Barisal";
         }
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        getLocationTemperature(databaseReference);
+        if (loc.equals("চট্টগ্রাম")) {
+            loc = "Chattogram";
+        }
+        if (loc.equals("ঢাকা")) {
+            loc = "Dhaka";
+        }
+        if (loc.equals("খুলনা")) {
+            loc = "Khulna";
+        }
+        if (loc.equals("রাজশাহী")) {
+            loc = "Rajshahi";
+        }
+        if (loc.equals("সিলেট")) {
+            loc = "Sylhet";
+        }
+        return loc;
+    }
+
+    String storm_verdict, max_temp, av_rainfall, min_temp, humidity, storm, suggestion_verdict;
+    private void giveCropSuggestion(String loc) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Weather Info");
+        databaseReference.child(loc).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                max_temp = String.valueOf(snapshot.child("max temp").getValue());
+                av_rainfall= String.valueOf(snapshot.child("average rainfall").getValue());
+                min_temp = String.valueOf(snapshot.child("min temp").getValue());
+                humidity = String.valueOf(snapshot.child("humidity").getValue());
+                storm = Objects.requireNonNull(snapshot.child("storm").getValue()).toString();
+
+//        Toast.makeText(requireContext(), max_temp, Toast.LENGTH_SHORT).show();
+
+                if (storm.equals("yes")) {
+                    storm_verdict = "ঝড়ের সম্ভাবনা আছে";
+                }
+                if (edit_crop_name.getText().toString().trim().equalsIgnoreCase("aus")) {
+                    suggestion_verdict = "ভাল পরিকল্পনা";
+                }
+                else {
+                    suggestion_verdict = "একটি ভাল পরিকল্পনা নয়\nকারণ: শীতকালিন ফসল";
+                }
+
+                String finalStorm_verdict = storm_verdict;
+                String finalSuggestion_verdict = suggestion_verdict;
+                new Handler().postDelayed(() -> {
+                    text_verdict.setText("");
+                    text_verdict.animationCompleteCallBack = null;
+                    text_verdict.setLetterSpacing(0f);
+                    text_verdict.setCharacterDelay(51);
+                    text_reason.setCharacterDelay(21);
+                    text_verdict.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    text_reason.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    text_verdict.removeCallbacks(() -> text_verdict.animateText("•••"));
+                    text_verdict.setAnimationCompleteListener(new Handler(
+                            msg -> {
+                                text_verdict.setText(finalSuggestion_verdict);
+                                text_reason.setAnimationCompleteListener(new Handler(
+                                        msg1 -> {
+                                            text_reason.setText(MessageFormat.format("গড় বৃষ্টিপাত (মিলিমিটার): {0} মিলিমিটার\nসর্বোচ্চ তাপমাত্রা (ডিগ্রী সেলসিয়াস): {1}° সেলসিয়াস\nসর্বনিম্ন তাপমাত্রা (ডিগ্রী সেলসিয়াস): {2}° সেলসিয়াস\nআদ্রতা (%): {3}%\n{4}\n\n\n",
+                                                    av_rainfall,
+                                                    max_temp,
+                                                    min_temp,
+                                                    humidity,
+                                                    finalStorm_verdict));
+                                            return false;
+                                        }));
+                                text_reason.animateText(MessageFormat.format("গড় বৃষ্টিপাত (মিলিমিটার): {0} মিলিমিটার\nসর্বোচ্চ তাপমাত্রা (ডিগ্রী সেলসিয়াস): {1}° সেলসিয়াস\nসর্বনিম্ন তাপমাত্রা (ডিগ্রী সেলসিয়াস): {2}° সেলসিয়াস\nআদ্রতা (%): {3}%\n{4}\n\n\n",
+                                        av_rainfall,
+                                        max_temp,
+                                        min_temp,
+                                        humidity,
+                                        finalStorm_verdict));
+                                return false;
+                            }
+                    ));
+                    text_verdict.animateText(finalSuggestion_verdict);
+                }, 3001);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     private void changeEditTextHint(EditText editText, String hint) {
