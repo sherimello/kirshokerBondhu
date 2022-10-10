@@ -48,7 +48,7 @@
     <string name="crop_nrecommendation">ফসলের\nসুপারিশ</string>
     <string name="crop_recommendation_desc">আবহাওয়ার তথ্য এবং পূর্বাভাসের বিশ্লেষণ প্রতিবেদনের ভিত্তিতে ফসলের সুপারিশ পান।</string>
     <string name="disease_ndiagnosis">রোগ\nনির্ণয়</string>
-    <string name="disease_diagnosis_desc">আপনার ফসলের একটি ছবি ক্যাপচার করে এবং আপলোড করার মাধ্যমে আপনার ফসলে কোন রোগে আক্রান্ত হয়েছে তা শনাক্ত করুন।</string>
+    <string name="disease_diagnosis_desc">আপনার ফসলের একটি ছবি প্রেরণের মাধ্যমে তা কোন রোগে আক্রান্ত হয়েছে তা শনাক্ত করুন।</string>
     <string name="soil_nidentification">মাটি\nসনাক্তকরণ</string>
     <string name="soil_identification_desc">আপনার জমির মাটির ধরন শনাক্ত করুন, শুধু মাটির ছবি তুলে আপলোড করে।</string>
     <string name="budget_nformulation">বাজেট\nপ্রণয়ন</string>

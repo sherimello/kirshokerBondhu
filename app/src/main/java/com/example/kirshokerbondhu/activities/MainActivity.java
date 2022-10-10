@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView image_bg;
     public ImageView image_menu, image_dp;
     private LinearLayout linear_info;
-    private CardView card_info, card_weather, card_main, card_crop_recommendation, card_budget_formulation;
+    private CardView card_info, card_weather, card_main, card_menu;
+//    private LinearLayout  linear_crop_recommendation, linear_budget_formulationtion;
     private View swipe_view;
     private TextView text_logout, text_mail, text_profile;
     private TypeWriter text_privacy;
@@ -78,12 +79,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button_signout = findViewById(R.id.button_signout);
         image_menu = findViewById(R.id.image_menu);
-        image_bg = findViewById(R.id.image_bg);
+//        image_bg = findViewById(R.id.image_bg);
         linear_info = findViewById(R.id.linear_info);
         aSwitch = findViewById(R.id.switch_notification);
         image_dp = findViewById(R.id.image_dp);
         card_main = findViewById(R.id.card_main);
         card_weather = findViewById(R.id.card_weather);
+        card_menu = findViewById(R.id.card_menu);
         card_info = findViewById(R.id.card_info);
         swipe_view = findViewById(R.id.swipe_view);
         text_logout = findViewById(R.id.text_logout);
@@ -96,15 +98,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         constraint_crop_recommendation = findViewById(R.id.constraint_crop_recommendation);
         constraint_budget_formulation = findViewById(R.id.constraint_budget_formulation);
         constraint_soil_detection = findViewById(R.id.constraint_soil_detection);
-        card_crop_recommendation = findViewById(R.id.card_crop_recommendation);
-        card_budget_formulation = findViewById(R.id.card_budget_formulation);
+//        linear_crop_recommendation = findViewById(R.id.card_crop_recommendation);
+//        linear_budget_formulationtion = findViewById(R.id.card_budget_formulation);
 
         setUpHeaderInfo();
 
-        Glide.with(this)
-                .load(ResourcesCompat.getDrawable(getResources(), R.drawable.grass, null))
-                .disallowHardwareConfig()
-                .into(image_bg);
+//        Glide.with(this)
+//                .load(ResourcesCompat.getDrawable(getResources(), R.drawable.grass, null))
+//                .disallowHardwareConfig()
+//                .into(image_bg);
 
         button_signout.setOnClickListener(view -> signOut());
 
@@ -121,14 +123,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         image_menu.setOnClickListener(this);
-        card_crop_recommendation.setOnClickListener(this);
+//        linear_crop_recommendation.setOnClickListener(this);
         card_weather.setOnClickListener(this);
         card_info.setOnClickListener(this);
+        card_menu.setOnClickListener(this);
         constraint_crop_recommendation.setOnClickListener(this);
         constraint_disease_detection.setOnClickListener(this);
         constraint_budget_formulation.setOnClickListener(this);
         constraint_soil_detection.setOnClickListener(this);
-        card_budget_formulation.setOnClickListener(this);
+//        linear_budget_formulationtion.setOnClickListener(this);
         text_logout.setOnClickListener(this);
         text_profile.setOnClickListener(this);
 
@@ -242,6 +245,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == text_logout) {
             signOut();
+        }
+        if (v == card_menu) {
+            animate_main_card();
         }
         if (v == image_menu) {
             animate_main_card();

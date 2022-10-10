@@ -17,17 +17,18 @@
     <style name="TextAppearance.Collapsed" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="fontFamily">@font/bontserrat_bold</item>
         <item name="android:fontFamily">@font/bontserrat_bold</item>
-        <item name="android:textColorPrimary">@color/greenishGrey</item>
+        <item name="android:textColorPrimary">@color/transparent</item>
         <item name="android:textSize">19sp</item>
-        <item name="android:textColor">@color/greenishGrey</item>
+        <item name="android:textColor">@color/transparent</item>
     </style>
 
     <style name="TextAppearance.Expanded" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="fontFamily">@font/bontserrat_bold</item>
         <item name="android:fontFamily">@font/bontserrat_bold</item>
-        <item name="backgroundColor">@color/lightGreen</item>
-        <item name="android:textColorPrimary">@color/greenishGrey</item>
-        <item name="android:textColor">@color/greenishGrey</item>
+        <item name="backgroundColor">#ffffff</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme"
