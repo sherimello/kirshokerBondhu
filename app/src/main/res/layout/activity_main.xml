@@ -23,21 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/image_bg"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:alpha=".0"-->
-<!--            android:contentDescription="@string/splash_background"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:src="@drawable/grass"-->
-<!--            android:transitionName="@string/Continue"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -73,7 +58,7 @@
                         android:fitsSystemWindows="true"
                         app:collapsedTitleGravity="center"
                         app:collapsedTitleTextAppearance="@style/TextAppearance.Expanded"
-                        app:contentScrim="#009688"
+                        app:contentScrim="#ffffff"
                         app:expandedTitleGravity="top"
                         app:expandedTitleMarginStart="17dp"
                         app:expandedTitleMarginTop="49dp"
@@ -98,10 +83,11 @@
 
                                 <ImageView
                                     android:id="@+id/imageView2"
-                                    android:layout_width="?actionBarSize"
-                                    android:layout_height="?actionBarSize"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
                                     android:layout_margin="11dp"
                                     android:padding="5dp"
+                                    android:scaleType="centerCrop"
                                     android:src="@drawable/kblogo"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -312,9 +298,9 @@
                                 android:layout_weight="50"
                                 android:outlineAmbientShadowColor="@color/green"
                                 android:outlineSpotShadowColor="@color/green"
-                                app:cardCornerRadius="31dp"
-                                android:background="@drawable/rounded_card_bg"
-                                app:cardElevation="3dp"
+                                android:background="@drawable/rounded_tl"
+                                android:clickable="true"
+                                android:focusable="true"
                                 tools:ignore="UnusedAttribute">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -323,7 +309,6 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="11dp"
-                                    android:background="?selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true">
 
@@ -409,7 +394,7 @@
                                 android:layout_weight="50"
                                 android:outlineAmbientShadowColor="@color/green"
                                 android:outlineSpotShadowColor="@color/green"
-                                android:background="@drawable/rounded_card_bg"
+                                android:background="@drawable/rounded_tr"
                                 app:cardElevation="3dp"
                                 tools:targetApi="p">
 
@@ -419,7 +404,6 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="11dp"
-                                    android:background="?selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true">
 
@@ -487,7 +471,7 @@
                                 android:layout_weight="50"
                                 android:outlineAmbientShadowColor="@color/green"
                                 android:outlineSpotShadowColor="@color/green"
-                                android:background="@drawable/rounded_card_bg"
+                                android:background="@drawable/rounded_bl"
                                 app:cardElevation="3dp"
                                 tools:targetApi="p">
 
@@ -497,7 +481,6 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="11dp"
-                                    android:background="?selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true">
 
@@ -555,7 +538,7 @@
                                 android:layout_weight="50"
                                 android:outlineAmbientShadowColor="@color/green"
                                 android:outlineSpotShadowColor="@color/green"
-                                android:background="@drawable/rounded_card_bg"
+                                android:background="@drawable/rounded_br"
                                 app:cardElevation="3dp"
                                 tools:ignore="UnusedAttribute">
 
@@ -565,7 +548,6 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="11dp"
-                                    android:background="?selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true">
 
@@ -692,8 +674,8 @@
 
                 <ImageView
                     android:id="@+id/image_menu"
-                    android:layout_width="21dp"
-                    android:layout_height="21dp"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
                     android:layout_margin="11dp"
                     android:contentDescription="@string/menu"
                     android:src="@drawable/menu1"
@@ -731,19 +713,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_menu_items"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="?actionBarSize"
-        android:gravity="center"
-        android:rotation="19"
+        android:gravity="top"
+        android:rotation="0"
+        android:alpha="0"
+        android:rotationY="-15"
         android:translationX="-200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".5"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945"
-        app:layout_constraintWidth_percent=".65"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintWidth_percent=".54"
         tools:rotation="0"
         tools:translationX="0dp">
         <!--        ●-->
@@ -755,6 +739,7 @@
             android:layout_marginTop="7dp"
             android:layout_marginEnd="7dp"
             android:layout_marginBottom="19dp"
+            android:textStyle="bold"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:drawablePadding="7dp"
@@ -771,52 +756,54 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/text_history"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/text_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
+            android:layout_marginBottom="7dp"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:drawablePadding="7dp"
             android:focusable="true"
             android:fontFamily="@font/bontserrat_bold"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="@string/history"
-            app:layout_constraintHorizontal_bias="0.21"
             android:textColor="@color/greenishGrey"
             android:textSize="17sp"
-            app:drawableStartCompat="@drawable/history"
+            app:drawableStartCompat="@drawable/history2"
             app:drawableTint="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintBottom_toTopOf="@id/text_notification"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/text_notification"/>
 
         <TextView
             android:id="@+id/text_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
             android:drawableStart="@drawable/notification"
             android:drawablePadding="7dp"
             android:fontFamily="@font/bontserrat_bold"
             android:text="দুর্যোগ\nবিজ্ঞপ্তি"
             android:textColor="@color/black"
-            android:layout_marginTop="19dp"
             android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="@id/text_history"
+            android:layout_marginEnd="11dp"
+            app:layout_constraintEnd_toStartOf="@+id/switch_notification"
             app:layout_constraintTop_toBottomOf="@+id/text_history" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/text_history"
-            app:layout_constraintTop_toTopOf="@+id/text_notification"
             android:layout_marginStart="17dp"
             app:layout_constraintBottom_toBottomOf="@id/text_notification"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="11dp"
+            app:layout_constraintTop_toTopOf="@+id/text_notification"
             app:thumbTint="@color/greenishGrey"
             app:trackTint="#55009688" />
 
@@ -824,9 +811,9 @@
             android:id="@+id/text_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
             android:layout_marginEnd="7dp"
             android:layout_marginBottom="7dp"
-            android:layout_marginTop="19dp"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
             android:drawablePadding="7dp"
@@ -841,7 +828,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@+id/text_history"
+            app:layout_constraintStart_toStartOf="@+id/text_notification"
             app:layout_constraintTop_toBottomOf="@+id/switch_notification"
             app:layout_constraintVertical_bias="0" />
 

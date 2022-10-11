@@ -53,9 +53,9 @@ import java.util.Random;
 public class bottom_spread_sheet extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private AutoCompleteTextView edit_crop_name, edit_area, edit_land_area;
-    private TextView text_reason_tag;
+    private TextView text_reason_tag, text_desc;
     private ImageView image_selected_picture, image_selected_picture_round;
-    private CardView card_open_camera, card_open_gallery, card_selected_picture;
+    private CardView card_open_camera, card_open_gallery, card_selected_picture, card_check, card_check2;
     private View view_gallery_left, view_gallery_right, view_camera_left, view_camera_right;
     private TypeWriter text_verdict, text_reason, text_disease_name, text_suggestions;
     private RadioButton radio_paddy, radio_others;
@@ -109,16 +109,20 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         edit_crop_name = v.findViewById(R.id.edit_crop_name);
         text_reason = v.findViewById(R.id.text_reason);
         text_verdict = v.findViewById(R.id.text_verdict);
+        text_desc = v.findViewById(R.id.text_desc);
         text_reason_tag = v.findViewById(R.id.text_reason_tag);
         radio_paddy = v.findViewById(R.id.radio_paddy);
         radio_others = v.findViewById(R.id.radio_others);
         constraint_container = v.findViewById(R.id.constraint_container);
-        button_check2 = v.findViewById(R.id.button_check);
+        card_check2 = v.findViewById(R.id.card_check);
+        card_check = v.findViewById(R.id.card_check);
+
+        text_desc.setText(getResources().getText(R.string.budget_formulation_desc));
 
 
         setRootLayoutAnimation();
         radio_paddy.setChecked(true);
-        button_check2.setOnClickListener(this);
+        card_check2.setOnClickListener(this);
 
         sharedPrefs = new SharedPrefs();
         addAdapterToLocationACTV();
@@ -145,6 +149,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         image_selected_picture_round = v.findViewById(R.id.image_selected_picture_round);
         relative_selected_picture = v.findViewById(R.id.relative_selected_picture);
         text_suggestions = v.findViewById(R.id.text_suggestions);
+        text_desc = v.findViewById(R.id.text_desc);
         text_disease_name = v.findViewById(R.id.text_disease_name);
         card_selected_picture = v.findViewById(R.id.card_selected_picture);
 
@@ -152,6 +157,13 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         view_camera_right.setOnClickListener(this);
         view_gallery_left.setOnClickListener(this);
         view_gallery_right.setOnClickListener(this);
+
+        if (tag.equals("soil detection1") || tag.equals("soil detection2")) {
+            text_desc.setText(getResources().getText(R.string.soil_identification_desc));
+        }
+        else {
+            text_desc.setText(getResources().getText(R.string.disease_diagnosis_desc));
+        }
 
         return v;
     }
@@ -163,21 +175,20 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
         edit_crop_name = v.findViewById(R.id.edit_crop_name);
         text_reason = v.findViewById(R.id.text_reason);
         text_verdict = v.findViewById(R.id.text_verdict);
+        text_desc = v.findViewById(R.id.text_desc);
         text_reason_tag = v.findViewById(R.id.text_reason_tag);
         radio_paddy = v.findViewById(R.id.radio_paddy);
         radio_others = v.findViewById(R.id.radio_others);
         constraint_container = v.findViewById(R.id.constraint_container);
-        button_check = v.findViewById(R.id.button_check);
+        card_check = v.findViewById(R.id.card_check);
 
-//        if (tag.equals(BUDGET_FORMATION)) {
-//            button_check.setText(R.string.get_budget);
-//        }
+        text_desc.setText(getResources().getText(R.string.crop_recommendation_desc));
 
         setRootLayoutAnimation();
 
 
         radio_paddy.setChecked(true);
-        button_check.setOnClickListener(this);
+        card_check.setOnClickListener(this);
 
         sharedPrefs = new SharedPrefs();
         addAdapterToLocationACTV();
@@ -261,6 +272,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                     }
 
                     if (tag.equals("disease detection1") || tag.equals("disease detection2")) {
+                        text_reason_tag.setVisibility(View.GONE);
                         text_suggestions.setVisibility(View.VISIBLE);
                         text_disease_name.setLetterSpacing(0f);
                         text_disease_name.setCharacterDelay(41);
@@ -437,11 +449,11 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
             direction = "left";
         }
 
-        if (v == button_check) {
+        if (v == card_check) {
             checkIfInputsAreOK();
         }
 
-        if (v == button_check2) {
+        if (v == card_check2) {
             checkIfInputsAreOK();
         }
 
@@ -527,7 +539,6 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                         ));
                         text_verdict.animateText("মোট: " + f.format(val_num) + "৳");
                     }, 0);
-//                    Toast.makeText(requireContext(), val, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -535,22 +546,11 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
 
                 }
             });
-//            String val = String.valueOf(getRandomNumber(100000, 150000));
 
             return;
         }
 
         giveCropSuggestion(getCleanLocation());
-
-//        if (counter > 0) {
-//            new Handler().postDelayed(() -> {
-//                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-//                getLocationTemperature(databaseReference);
-//            }, 2000);
-//            return;
-//        }
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-//        getLocationTemperature(databaseReference);
     }
 
     private String getCleanLocation() {
@@ -601,7 +601,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                     suggestion_verdict = "ভাল পরিকল্পনা";
                 }
                 else {
-                    suggestion_verdict = "একটি ভাল পরিকল্পনা নয়\nকারণ: শীতকালিন ফসল";
+                    suggestion_verdict = "মন্দ পরিকল্পনা\nকারণ: শীতকালিন ফসল";
                 }
 
                 String finalStorm_verdict = storm_verdict;

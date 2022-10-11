@@ -199,7 +199,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 this,
                 Pair.create(card_dp, getResources().getString(R.string.card)));
 
-        startActivity(new Intent(getApplicationContext(), MainActivity.class), options.toBundle());
+        startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("type", "usual"), options.toBundle());
         new Handler().postDelayed(this::finish, 1500);
     }
 

@@ -77,6 +77,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+        Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
+
+        if (type.equals("notification")) {
+            startActivity(new Intent(getApplicationContext(), Weather.class));
+            finish();
+        }
+
         button_signout = findViewById(R.id.button_signout);
         image_menu = findViewById(R.id.image_menu);
 //        image_bg = findViewById(R.id.image_bg);
@@ -110,17 +118,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button_signout.setOnClickListener(view -> signOut());
 
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            aSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
+                if (card_main.getAlpha() != 1)
                 if (compoundButton.isChecked()) {
                     Toast.makeText(MainActivity.this, "on", Toast.LENGTH_SHORT).show();
-                    new Handler().postDelayed(() -> {
-                        notification();
-                    }, 3000);
+                    new Handler().postDelayed(this::notification, 3000);
                 }
-            }
-        });
+            });
+
 
         image_menu.setOnClickListener(this);
 //        linear_crop_recommendation.setOnClickListener(this);
@@ -137,8 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         swipe_view.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
             @Override
-            public void onSwipeLeft() {
-                super.onSwipeLeft();
+            public void onSwipeRight() {
+                super.onSwipeRight();
                 resetMainCardFromMenuExpansionAnimation();
             }
         });
@@ -151,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-        Intent resultIntent = new Intent(this, Weather.class);
+        Intent resultIntent = new Intent(this, MainActivity.class).putExtra("type", "notification");
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "disaster notification");
         builder.setContentTitle("প্রাকৃতিক দূর্যোগ");
@@ -173,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animator.start();
         swipe_view.setVisibility(View.GONE);
         card_main.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        card_main.animate().rotation(0).translationY(0).translationX(0).scaleX(1).scaleY(1).setDuration(500).setInterpolator(new OvershootInterpolator());
-        constraint_menu_items.animate().translationX(-convertToPx(200)).rotation(19).setDuration(500).setInterpolator(new OvershootInterpolator());
+        card_main.animate().alpha(1).rotationY(0).translationY(0).translationX(0).scaleX(1).scaleY(1).setDuration(500).setInterpolator(new OvershootInterpolator());
+        constraint_menu_items.animate().alpha(0).translationX(-convertToPx(200)).rotationY(-15).setDuration(500).setInterpolator(new OvershootInterpolator());
         constraint_menu_items.setLayerType(View.LAYER_TYPE_NONE, null);
 
     }
@@ -182,7 +187,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setUpHeaderInfo() {
         setUserPicture();
         collapsing_toolbar.setTitle("স্বাগতম " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
-        text_mail.setText(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail());
+        text_mail.setText("স্বাগতম " + Objects.requireNonNull(mAuth.getCurrentUser()).getDisplayName());
+//        text_mail.setText(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail());
         text_privacy.setCharacterDelay(21);
         text_privacy.animateText(getString(R.string.privacy_text));
     }
@@ -236,15 +242,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         }
         if (v == text_profile) {
-            final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
-                    this,
-                    Pair.create(card_main, getResources().getString(R.string.card)));
+            if (card_main.getAlpha() != 1) {
+                final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                        this,
+                        Pair.create(card_main, getResources().getString(R.string.card)));
 
-            startActivity(new Intent(getApplicationContext(), Profile.class), options.toBundle());
-            new Handler().postDelayed(this::finish, 1000);
+                startActivity(new Intent(getApplicationContext(), Profile.class), options.toBundle());
+                new Handler().postDelayed(this::finish, 1000);
+            }
         }
         if (v == text_logout) {
-            signOut();
+            if (card_main.getAlpha() != 1) {
+                signOut();
+            }
         }
         if (v == card_menu) {
             animate_main_card();
@@ -284,11 +294,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .ofFloat(card_main, "radius", 0, convertToPx(17));
         animator.setDuration(500);
         animator.start();
+        card_main.setCardElevation(11);
         card_main.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         float width = getSystem().getDisplayMetrics().widthPixels;
-        card_main.animate().rotation(-19).translationY(-width * .2f).translationX(width * .3f).scaleX(.8f).scaleY(.8f).setDuration(500).setInterpolator(new OvershootInterpolator());
+        float height = getSystem().getDisplayMetrics().heightPixels;
+        card_main.animate().alpha(0).rotationY(-15).translationY(0).translationX(-width * .5f).scaleX(.97f).scaleY(.97f).setDuration(500).setInterpolator(new OvershootInterpolator());
+//        card_main.animate().rotation(-19).translationY(-width * .2f).translationX(width * .3f).scaleX(.8f).scaleY(.8f).setDuration(500).setInterpolator(new OvershootInterpolator());
         constraint_menu_items.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        constraint_menu_items.animate().translationX(0).rotation(0).setDuration(500).setInterpolator(new OvershootInterpolator());
+        constraint_menu_items.animate().alpha(1).translationX(0).rotationY(0).setDuration(500).setInterpolator(new OvershootInterpolator());
     }
 
     public int convertToPx(int dp) {

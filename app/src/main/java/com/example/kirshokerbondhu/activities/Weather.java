@@ -45,7 +45,7 @@ public class Weather extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("type", "usual"));
         finish();
     }
 }

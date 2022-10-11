@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,16 +12,46 @@
         android:animateLayoutChanges="true"
         android:paddingTop="11dp">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="11dp"
+            app:cardBackgroundColor="@color/black"
+            app:cardCornerRadius="31dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="21dp"
+                android:fontFamily="@font/bontserrat_bold"
+                android:padding="11dp"
+                android:text="@string/crop_recommendation_desc"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.cardview.widget.CardView>
+
+
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
             android:gravity="center"
+            android:layout_marginTop="17dp"
             android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/card_desc"
             app:layout_constraintEnd_toEndOf="@+id/edit_crop_name"
-            app:layout_constraintStart_toStartOf="@+id/edit_crop_name"
-            app:layout_constraintTop_toBottomOf="@+id/button_check">
+            app:layout_constraintStart_toStartOf="@+id/edit_crop_name">
 
             <RadioButton
                 android:id="@+id/radio_paddy"
@@ -39,22 +70,22 @@
 
         </RadioGroup>
 
-        <Button
-            android:id="@+id/button_check"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="21dp"
-            android:backgroundTint="#009688"
-            android:fontFamily="@font/bontserrat_bold"
-            android:hapticFeedbackEnabled="true"
-            android:paddingVertical="0dp"
-            android:text="@string/get_budget"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/button_check"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="21dp"-->
+<!--            android:backgroundTint="#009688"-->
+<!--            android:fontFamily="@font/bontserrat_bold"-->
+<!--            android:hapticFeedbackEnabled="true"-->
+<!--            android:paddingVertical="0dp"-->
+<!--            android:text="@string/get_budget"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <TextView
             android:id="@+id/text_crop_name"
@@ -202,6 +233,35 @@
             app:layout_constraintVertical_bias="0"
             app:layout_constraintWidth_percent=".65" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#009688"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="5dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintEnd_toEndOf="@+id/edit_area"
+            app:layout_constraintTop_toBottomOf="@+id/edit_land_area">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="11dp"
+                android:layout_marginBottom="7dp"
+                android:drawablePadding="11dp"
+                android:fontFamily="@font/bontserrat_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/check"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/done"
+                app:drawableTint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
 
         <com.example.kirshokerbondhu.classes.TypeWriter
             android:id="@+id/text_verdict"
@@ -216,7 +276,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_land_area" />
+            app:layout_constraintTop_toBottomOf="@+id/card_check" />
 
         <TextView
             android:id="@+id/text_reason_tag"

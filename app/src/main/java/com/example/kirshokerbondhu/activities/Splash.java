@@ -89,7 +89,7 @@ public class Splash extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), SignIn.class), options.toBundle());
                     new Handler().postDelayed(this::finish, 2000);
                 } else {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("type", "usual"));
                     finish();
                 }
             } else {

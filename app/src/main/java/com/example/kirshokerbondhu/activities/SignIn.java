@@ -190,7 +190,7 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void changeActivity(Object c) {
-        startActivity(new Intent(getApplicationContext(), c.getClass()));
+        startActivity(new Intent(getApplicationContext(), c.getClass()).putExtra("type", "usual"));
         finish();
     }
 }

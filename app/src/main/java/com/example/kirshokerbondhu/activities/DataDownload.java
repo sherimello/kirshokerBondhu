@@ -140,7 +140,7 @@ public class DataDownload extends AppCompatActivity {
     }
 
     public void changeActivity() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class).putExtra("type", "usual"));
         finish();
     }
 
