@@ -272,7 +272,7 @@ public class bottom_spread_sheet extends BottomSheetDialogFragment implements Vi
                     }
 
                     if (tag.equals("disease detection1") || tag.equals("disease detection2")) {
-                        text_reason_tag.setVisibility(View.GONE);
+                        text_desc.setVisibility(View.GONE);
                         text_suggestions.setVisibility(View.VISIBLE);
                         text_disease_name.setLetterSpacing(0f);
                         text_disease_name.setCharacterDelay(41);

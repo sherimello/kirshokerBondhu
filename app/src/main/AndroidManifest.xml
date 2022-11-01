@@ -8,11 +8,13 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission
-        android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
-    <uses-permission android:name="android.permission.USE_EXACT_ALARM"
-        android:minSdkVersion="33"/>
+        android:name="android.permission.USE_EXACT_ALARM"
+        android:minSdkVersion="33" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/kblogo"
@@ -20,7 +22,13 @@
         android:roundIcon="@drawable/kblogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.KirshokerBondhu">
-
+        <activity
+            android:name=".Subscription"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".activities.Info"
             android:exported="false">
