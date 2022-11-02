@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KirshokerBondhu">
         <activity
-            android:name=".Subscription"
+            android:name=".activities.Subscription"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

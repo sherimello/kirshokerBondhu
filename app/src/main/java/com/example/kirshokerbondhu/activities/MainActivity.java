@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CardView card_info, card_weather, card_main, card_menu;
 //    private LinearLayout  linear_crop_recommendation, linear_budget_formulationtion;
     private View swipe_view;
-    private TextView text_logout, text_mail, text_profile;
+    private TextView text_logout, text_mail, text_profile, text_subscription;
     private TypeWriter text_privacy;
     private CollapsingToolbarLayout collapsing_toolbar;
     private ConstraintLayout constraint_soil_detection, constraint_budget_formulation, constraint_disease_detection, constraint_menu_items, constraint_crop_recommendation;
@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         text_mail = findViewById(R.id.text_mail);
         text_privacy = findViewById(R.id.text_privacy);
         text_profile = findViewById(R.id.text_profile);
+        text_subscription = findViewById(R.id.text_subscription);
         collapsing_toolbar = findViewById(R.id.collapsing_toolbar);
         constraint_menu_items = findViewById(R.id.constraint_menu_items);
         constraint_disease_detection = findViewById(R.id.constraint_disease_detection);
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        linear_budget_formulationtion.setOnClickListener(this);
         text_logout.setOnClickListener(this);
         text_profile.setOnClickListener(this);
+        text_subscription.setOnClickListener(this);
 
         swipe_view.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
             @Override
@@ -256,6 +258,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 signOut();
             }
         }
+
+        if(v == text_subscription) {
+            startActivity(new Intent(getApplicationContext(), Subscription.class));
+            finish();
+        }
+
         if (v == card_menu) {
             animate_main_card();
         }
